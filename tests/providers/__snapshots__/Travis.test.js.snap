@@ -6,3 +6,14 @@ exports[`Travis parseLog returns the correct string 1`] = `
 
 Error: no test specified"
 `;
+
+exports[`Travis serialize returns the correct body string 1`] = `
+"Here's the failing log from [1](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification/1):
+\`\`\`
+> public-test@1.0.0 test /home/travis/build/JasonEtco/public-test
+> echo \\"Error: no test specified\\" && exit 1
+
+Error: no test specified
+\`\`\`
+"
+`;
