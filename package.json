@@ -8,7 +8,7 @@
   "scripts": {
     "start": "probot run ./lib/index.js",
     "start-dev": "nodemon ./node_modules/probot/bin/probot-run ./lib/index.js",
-    "test": "jest && standard"
+    "test": "jest --coverage && standard"
   },
   "dependencies": {
     "probot": "^4.0.0",
