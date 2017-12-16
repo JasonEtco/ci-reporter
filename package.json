@@ -1,0 +1,34 @@
+{
+  "name": "ci-viewer",
+  "version": "1.0.0",
+  "description": "",
+  "author": "JasonEtco <jasonetco@gmail.com> (https://github.com/jasonetco/ci-viewer)",
+  "license": "ISC",
+  "repository": "https://github.com/JasonEtco/ci-viewer.git",
+  "scripts": {
+    "start": "probot run ./lib/index.js",
+    "start-dev": "nodemon ./node_modules/probot/bin/probot-run ./lib/index.js",
+    "test": "jest && standard"
+  },
+  "dependencies": {
+    "probot": "^4.0.0",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "localtunnel": "^1.8.2",
+    "nock": "^9.1.4",
+    "nodemon": "^1.13.2",
+    "standard": "^10.0.3"
+  },
+  "engines": {
+    "node": ">= 7.7.0",
+    "npm": ">= 4.0.0"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  }
+}
