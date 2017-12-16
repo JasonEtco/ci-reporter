@@ -1,6 +1,6 @@
-# ci-viewer
+# ci-reporter
 
-> a GitHub App built with [probot](https://github.com/probot/probot) that 
+> a GitHub App built with [probot](https://github.com/probot/probot) that pastes the error output of a failing commit into the relevant PR.
 
 ## Setup
 
