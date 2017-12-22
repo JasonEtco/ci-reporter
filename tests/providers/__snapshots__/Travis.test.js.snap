@@ -19,7 +19,8 @@ I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of
 `;
 
 exports[`Travis serialize returns the correct body string with multiple jobs 1`] = `
-"sparkles: Good work on this PR so far! :sparkles: Unfortunately, some [builds are failing](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification).
+":sparkles: Good work on this PR so far! :sparkles: Unfortunately, some [builds are failing](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification).
+
 Here's the failing log from [1](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification/1):
 \`\`\`
 > public-test@1.0.0 test /home/travis/build/JasonEtco/public-test
