@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Circle serialize returns the correct body string 1`] = `
+":sparkles: Good work on this PR so far! :sparkles: Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_source=github_status&utm_medium=notification) is failing. Here's the output:
+\`\`\`
+
+> todo@1.0.0 test /home/circleci/repo
+> jest && codecov && standard
+
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mmetadata.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mgenerate-blob-link.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mreopen-closed.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mcommit-is-in-pr.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mgenerate-label.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mgenerate-body.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mlanguages.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1minstallation.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mpr-comments.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mmerge-handler.js[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mopen-issues.js[22m
+[999D[K
+[1mTest Suites: [22m[1m[32m11 passed[39m[22m, 11 total
+[1mTests:       [22m[1m[32m70 passed[39m[22m, 70 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        4.678s
+[2mRan all test suites[22m[2m.[22m
+--------------------------------|----------|----------|----------|----------|----------------|
+File                            |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+--------------------------------|----------|----------|----------|----------|----------------|
+All files                       |      100 |      100 |      100 |      100 |                |
+ repo                           |      100 |      100 |      100 |      100 |                |
+  index.js                      |      100 |      100 |      100 |      100 |                |
+ repo/lib                       |      100 |      100 |      100 |      100 |                |
+  check-for-duplicate-issue.js  |      100 |      100 |      100 |      100 |                |
+  commit-is-in-pr.js            |      100 |      100 |      100 |      100 |                |
+  default-config.js             |      100 |      100 |      100 |      100 |                |
+  generate-blob-link.js         |      100 |      100 |      100 |      100 |                |
+  generate-body.js              |      100 |      100 |      100 |      100 |                |
+  generate-label.js             |      100 |      100 |      100 |      100 |                |
+  get-file-contents.js          |      100 |      100 |      100 |      100 |                |
+  helpers.js                    |      100 |      100 |      100 |      100 |                |
+  merge-handler.js              |      100 |      100 |      100 |      100 |                |
+  metadata.js                   |      100 |      100 |      100 |      100 |                |
+  open-issues.js                |      100 |      100 |      100 |      100 |                |
+  organize-commits.js           |      100 |      100 |      100 |      100 |                |
+  reopen-closed.js              |      100 |      100 |      100 |      100 |                |
+  search-contents-for-titles.js |      100 |      100 |      100 |      100 |                |
+--------------------------------|----------|----------|----------|----------|----------------|
+  _____          _  
+ / ____|        | |  
+| |     ___   __| | ___  ___ _____   __  
+| |    / _ \\\\ / _\` |/ _ \\\\/ __/ _ \\\\ \\\\ / /  
+| |___| (_) | (_| |  __/ (_| (_) \\\\ V /  
+ \\\\_____\\\\___/ \\\\__,_|\\\\___|\\\\___\\\\___/ \\\\_/  
+                                v2.3.0
+==> Detecting CI Provider
+    Circle CI Detected
+==> Configuration: 
+    Endpoint: https://codecov.io
+{ service: 'circleci',
+  build: '5.0',
+  job: '5.0',
+  commit: 'f485a7dcc6193a33ef1090ef6b6bc5cc8dde75d2',
+  branch: 'cleanup',
+  pr: undefined,
+  slug: 'JasonEtco/todo',
+  package: 'node-v2.3.0' }
+==> Building file structure
+==> Generating gcov reports (skip via --disable=gcov)
+    $ find /home/circleci/repo -type f -name '*.gcno'  -exec gcov  {} +
+==> Scanning for reports
+    + /home/circleci/repo/coverage/lcov.info
+    + /home/circleci/repo/coverage/clover.xml
+==> Uploading reports
+    Success!
+    View report at: https://codecov.io/github/JasonEtco/todo/commit/f485a7dcc6193a33ef1090ef6b6bc5cc8dde75d2
+
+\`\`\`
+I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!"
+`;
