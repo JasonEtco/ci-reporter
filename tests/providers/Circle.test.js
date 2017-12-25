@@ -3,6 +3,8 @@ const nock = require('nock')
 const fs = require('fs')
 const path = require('path')
 
+const readFile = file => fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'circle', file), 'utf8')
+
 describe('Circle', () => {
   describe('static get ctx()', () => {
     it('returns the correct status context string', () => {
@@ -19,7 +21,7 @@ describe('Circle', () => {
   })
 
   describe('parseLog', () => {
-    const log = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'circle', 'log.txt'), 'utf8')
+    const log = readFile('log.txt')
     it('returns the correct log string', () => {
       const circle = new Circle()
       const actual = circle.parseLog(log)
@@ -31,8 +33,8 @@ describe('Circle', () => {
     let circle
 
     beforeEach(() => {
-      const build = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'circle', 'build.json'), 'utf8')
-      const output = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'circle', 'output.json'), 'utf8')
+      const build = readFile('build.json')
+      const output = readFile('output.json')
 
       nock('https://circleci.com')
         .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
@@ -50,6 +52,15 @@ describe('Circle', () => {
       const res = await circle.serialize()
       expect(res.number).toBe(1)
       expect(res.body).toMatchSnapshot()
+    })
+
+    it('returns false if the status is not on a PR', async () => {
+      nock.cleanAll()
+      nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, readFile('commit.json'))
+
+      const res = await circle.serialize()
+      expect(res).toBeFalsy()
     })
 
     // it('returns the correct body string with multiple jobs', async () => {
