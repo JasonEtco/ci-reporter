@@ -6,7 +6,7 @@ const path = require('path')
 describe('Circle', () => {
   describe('static get ctx()', () => {
     it('returns the correct status context string', () => {
-      expect(Circle.ctx).toBe('continuous-integration/circle-ci/pr')
+      expect(Circle.ctx).toBe('ci/circleci')
     })
   })
 
@@ -15,6 +15,15 @@ describe('Circle', () => {
       const circle = new Circle()
       const repo = { owner: 'JasonEtco', repo: 'ci-reporter' }
       expect(circle.buildUri(repo, 317090494)).toBe('https://circleci.com/api/v1.1/project/github/JasonEtco/ci-reporter/317090494')
+    })
+  })
+
+  describe('parseLog', () => {
+    const log = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'circle', 'log.txt'), 'utf8')
+    it('returns the correct log string', () => {
+      const circle = new Circle()
+      const actual = circle.parseLog(log)
+      expect(actual).toMatchSnapshot()
     })
   })
 
