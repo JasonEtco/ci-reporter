@@ -1,0 +1,7 @@
+
+> failing-repo@1.0.0 test /home/circleci/repo
+> echo "Error: no test specified" && exit 1
+
+Error: no test specified
+[37;40mnpm[0m [0m[31;40mERR![0m[35m[0m Test failed.  See above for more details.
+[0m

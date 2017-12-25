@@ -29,7 +29,7 @@ describe('Travis', () => {
 
     beforeEach(() => {
       travis = new Travis()
-      log = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'log.txt'), 'utf8')
+      log = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'travis', 'log.txt'), 'utf8')
     })
 
     it('returns the correct string', () => {
@@ -39,7 +39,7 @@ describe('Travis', () => {
 
   describe('serialize', () => {
     let ctx, travis
-    const logFile = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'log.txt'), 'utf8')
+    const logFile = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'travis', 'log.txt'), 'utf8')
 
     beforeEach(() => {
       nock('https://api.travis-ci.org')
