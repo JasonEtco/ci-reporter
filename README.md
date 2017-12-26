@@ -2,7 +2,7 @@
 
 > a GitHub App built with [probot](https://github.com/probot/probot) that pastes the error output of a failing commit into the relevant PR.
 
-Currently only support TravisCI, but others are coming :soon:
+Currently supports TravisCI and CircleCI with "simple" setups running off of a single `npm test` script.
 
 ## Setup
 
