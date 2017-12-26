@@ -79,3 +79,14 @@ standard: Run \`standard --fix\` to automatically fix some problems.
 \`\`\`
 I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!"
 `;
+
+exports[`ci-reporter works with Travis CI 1`] = `
+":sparkles: Good work on this PR so far! :sparkles: Unfortunately, the [Travis CI build](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification) is failing. Here's the output:
+\`\`\`
+> public-test@1.0.0 test /home/travis/build/JasonEtco/public-test
+> echo \\"Error: no test specified\\" && exit 1
+
+Error: no test specified
+\`\`\`
+I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!"
+`;

@@ -21,8 +21,40 @@ describe('ci-reporter', () => {
     ciReporter(robot)
   })
 
-  // it('works with Travis CI', async () => {
-  // })
+  it('works with Travis CI', async () => {
+    const log = readFile(path.join('travis', 'log.txt'))
+
+    nock('https://api.travis-ci.org')
+      .get('/builds/123').reply(200, JSON.stringify({
+        build: { pull_request_number: 1 },
+        jobs: [{ id: 1234, number: 1, state: 'failed' }]
+      }))
+      .get('/jobs/1234/log').reply(200, log)
+
+    const event = {
+      event: 'status',
+      payload: {
+        target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification',
+        context: 'continuous-integration/travis-ci/pr',
+        state: 'failure',
+        repository: {
+          name: 'public-test',
+          owner: { login: 'JasonEtco' }
+        },
+        installation: { id: 123 }
+      }
+    }
+
+    await robot.receive(event)
+    const args = github.issues.createComment.mock.calls[0]
+
+    expect(args[0].body).toMatchSnapshot()
+    expect(args[0].number).toBe(1)
+    expect(args[0].owner).toBe('JasonEtco')
+    expect(args[0].repo).toBe('public-test')
+
+    expect(github.issues.createComment).toHaveBeenCalledTimes(1)
+  })
 
   it('works with Circle CI', async () => {
     const build = readFile(path.join('circle', 'build.json'))
