@@ -4,6 +4,8 @@ const fs = require('fs')
 const path = require('path')
 
 describe('Travis', () => {
+  const log = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'travis', 'log.txt'), 'utf8')
+
   describe('static get ctx()', () => {
     it('returns the correct status context string', () => {
       expect(Travis.ctx).toBe('continuous-integration/travis-ci/pr')
@@ -25,11 +27,10 @@ describe('Travis', () => {
   })
 
   describe('parseLog', () => {
-    let log, travis
+    let travis
 
     beforeEach(() => {
       travis = new Travis()
-      log = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'travis', 'log.txt'), 'utf8')
     })
 
     it('returns the correct string', () => {
@@ -38,8 +39,7 @@ describe('Travis', () => {
   })
 
   describe('serialize', () => {
-    let ctx, travis
-    const logFile = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'travis', 'log.txt'), 'utf8')
+    let travis
 
     beforeEach(() => {
       nock('https://api.travis-ci.org')
@@ -47,13 +47,12 @@ describe('Travis', () => {
           build: { pull_request_number: 1 },
           jobs: [{ id: 1234, number: 1, state: 'failed' }]
         }))
-        .get('/jobs/1234/log').reply(200, logFile)
-      ctx = {
+        .get('/jobs/1234/log').reply(200, log)
+      travis = new Travis({
         payload: {
           target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification'
         }
-      }
-      travis = new Travis(ctx)
+      })
     })
 
     it('returns the correct body string', async () => {
@@ -69,8 +68,8 @@ describe('Travis', () => {
           build: { pull_request_number: 1 },
           jobs: [{ id: 1234, number: 1, state: 'failed' }, { id: 12345, number: 1, state: 'failed' }]
         }))
-        .get('/jobs/1234/log').reply(200, logFile)
-        .get('/jobs/12345/log').reply(200, logFile)
+        .get('/jobs/1234/log').reply(200, log)
+        .get('/jobs/12345/log').reply(200, log)
 
       const res = await travis.serialize()
       expect(res.number).toBe(1)
