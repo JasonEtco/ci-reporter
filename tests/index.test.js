@@ -88,4 +88,31 @@ describe('ci-reporter', () => {
 
     expect(github.issues.createComment).toHaveBeenCalledTimes(1)
   })
+
+  it('does nothing if the status context is not accounted for', async () => {
+    const event = {
+      event: 'status',
+      payload: {
+        context: 'i/do/not/exist',
+        state: 'failure',
+        installation: { id: 123 }
+      }
+    }
+
+    await robot.receive(event)
+    expect(github.issues.createComment).not.toHaveBeenCalled()
+  })
+
+  it('does nothing on non-failed status', async () => {
+    const event = {
+      event: 'status',
+      payload: {
+        state: 'passed',
+        installation: { id: 123 }
+      }
+    }
+
+    await robot.receive(event)
+    expect(github.issues.createComment).not.toHaveBeenCalled()
+  })
 })
