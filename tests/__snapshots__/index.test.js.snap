@@ -1,14 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Circle parseLog returns the correct log string 1`] = `
-"> failing-repo@1.0.0 test /home/circleci/repo
-> echo \\"Error: no test specified\\" && exit 1
-
-Error: no test specified"
-`;
-
-exports[`Circle serialize returns the correct body string 1`] = `
-":sparkles: Good work on this PR so far! :sparkles: Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_source=github_status&utm_medium=notification) is failing. Here's the output:
+exports[`ci-reporter works with Circle CI 1`] = `
+":sparkles: Good work on this PR so far! :sparkles: Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link) is failing. Here's the output:
 \`\`\`
 > todo@1.0.0 test /home/circleci/repo
 > jest && codecov && standard
