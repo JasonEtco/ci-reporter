@@ -39,6 +39,7 @@ describe('ci-reporter', () => {
       const event = {
         event: 'status',
         payload: {
+          commit: 'b04b9ce383a933ed1a0a7b3de9e1cd31770b380e',
           target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification',
           context: 'continuous-integration/travis-ci/pr',
           state: 'failure',
@@ -69,6 +70,7 @@ describe('ci-reporter', () => {
       event = {
         event: 'status',
         payload: {
+          commit: 'b04b9ce383a933ed1a0a7b3de9e1cd31770b380e',
           target_url: 'https://circleci.com/gh/JasonEtco/todo/5?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link',
           context: 'ci/circleci',
           state: 'failure',

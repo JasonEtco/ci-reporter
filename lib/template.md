@@ -1,4 +1,4 @@
-✨ Good work on this PR so far! ✨ Unfortunately, the [{{ provider }} build]({{ targetUrl }}) is failing. Here's the output:
+✨ Good work on this PR so far! ✨ Unfortunately, the [{{ provider }} build]({{ targetUrl }}) is failing as of {{ commit }}. Here's the output:
 
 ```
 {{ content }}
