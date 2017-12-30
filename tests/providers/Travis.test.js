@@ -43,10 +43,10 @@ describe('Travis', () => {
 
     beforeEach(() => {
       nock('https://api.travis-ci.org')
-        .get('/builds/123').reply(200, JSON.stringify({
+        .get('/builds/123').reply(200, {
           build: { pull_request_number: 1 },
           jobs: [{ id: 1234, number: 1, state: 'failed' }]
-        }))
+        })
         .get('/jobs/1234/log').reply(200, log)
       travis = new Travis({
         payload: {
