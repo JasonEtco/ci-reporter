@@ -48,10 +48,10 @@ describe('Circle', () => {
       })
     })
 
-    it('returns the correct body string', async () => {
+    it('returns the correct content string', async () => {
       const res = await circle.serialize()
       expect(res.number).toBe(1)
-      expect(res.body).toMatchSnapshot()
+      expect(res.data.content).toMatchSnapshot()
     })
 
     it('returns false if the status is not on a PR', async () => {

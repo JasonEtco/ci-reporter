@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ci-reporter works with Circle CI 1`] = `
-":sparkles: Good work on this PR so far! :sparkles: Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link) is failing. Here's the output:
+"✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&#x3D;vcs-integration-link&amp;utm_medium&#x3D;referral&amp;utm_source&#x3D;github-build-link) is failing. Here's the output:
+
 \`\`\`
-> todo@1.0.0 test /home/circleci/repo
-> jest && codecov && standard
+&gt; todo@1.0.0 test /home/circleci/repo
+&gt; jest &amp;&amp; codecov &amp;&amp; standard
 
 [0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mmetadata.js[22m
 [0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mgenerate-blob-link.js[22m
@@ -48,45 +49,48 @@ All files                       |      100 |      100 |      100 |      100 |   
   _____          _  
  / ____|        | |  
 | |     ___   __| | ___  ___ _____   __  
-| |    / _ \\\\ / _\` |/ _ \\\\/ __/ _ \\\\ \\\\ / /  
+| |    / _ \\\\ / _&#x60; |/ _ \\\\/ __/ _ \\\\ \\\\ / /  
 | |___| (_) | (_| |  __/ (_| (_) \\\\ V /  
  \\\\_____\\\\___/ \\\\__,_|\\\\___|\\\\___\\\\___/ \\\\_/  
                                 v2.3.0
-==> Detecting CI Provider
+&#x3D;&#x3D;&gt; Detecting CI Provider
     Circle CI Detected
-==> Configuration: 
+&#x3D;&#x3D;&gt; Configuration: 
     Endpoint: https://codecov.io
-{ service: 'circleci',
-  build: '4.0',
-  job: '4.0',
-  commit: '36eeffbb45a75f1ac2ef3c8b491b5a1d9b4afefa',
-  branch: 'cleanup',
+{ service: &#x27;circleci&#x27;,
+  build: &#x27;4.0&#x27;,
+  job: &#x27;4.0&#x27;,
+  commit: &#x27;36eeffbb45a75f1ac2ef3c8b491b5a1d9b4afefa&#x27;,
+  branch: &#x27;cleanup&#x27;,
   pr: undefined,
-  slug: 'JasonEtco/todo',
-  package: 'node-v2.3.0' }
-==> Building file structure
-==> Generating gcov reports (skip via --disable=gcov)
-    $ find /home/circleci/repo -type f -name '*.gcno'  -exec gcov  {} +
-==> Scanning for reports
+  slug: &#x27;JasonEtco/todo&#x27;,
+  package: &#x27;node-v2.3.0&#x27; }
+&#x3D;&#x3D;&gt; Building file structure
+&#x3D;&#x3D;&gt; Generating gcov reports (skip via --disable&#x3D;gcov)
+    $ find /home/circleci/repo -type f -name &#x27;*.gcno&#x27;  -exec gcov  {} +
+&#x3D;&#x3D;&gt; Scanning for reports
     + /home/circleci/repo/coverage/clover.xml
     + /home/circleci/repo/coverage/lcov.info
-==> Uploading reports
+&#x3D;&#x3D;&gt; Uploading reports
     Success!
     View report at: https://codecov.io/github/JasonEtco/todo/commit/36eeffbb45a75f1ac2ef3c8b491b5a1d9b4afefa
 standard: Use JavaScript Standard Style (https://standardjs.com)
-standard: Run \`standard --fix\` to automatically fix some problems.
+standard: Run &#x60;standard --fix&#x60; to automatically fix some problems.
   /home/circleci/repo/lib/search-contents-for-titles.js:15:2: Newline required at end of file but not found.
 \`\`\`
+
 I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!"
 `;
 
 exports[`ci-reporter works with Travis CI 1`] = `
-":sparkles: Good work on this PR so far! :sparkles: Unfortunately, the [Travis CI build](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification) is failing. Here's the output:
+"✨ Good work on this PR so far! ✨ Unfortunately, the [Travis CI build](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source&#x3D;github_status&amp;utm_medium&#x3D;notification) is failing. Here's the output:
+
 \`\`\`
-> public-test@1.0.0 test /home/travis/build/JasonEtco/public-test
-> echo \\"Error: no test specified\\" && exit 1
+&gt; public-test@1.0.0 test /home/travis/build/JasonEtco/public-test
+&gt; echo &quot;Error: no test specified&quot; &amp;&amp; exit 1
 
 Error: no test specified
 \`\`\`
+
 I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!"
 `;

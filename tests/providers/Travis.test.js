@@ -58,10 +58,10 @@ describe('Travis', () => {
     it('returns the correct body string', async () => {
       const res = await travis.serialize()
       expect(res.number).toBe(1)
-      expect(res.body).toMatchSnapshot()
+      expect(res.data.content).toMatchSnapshot()
     })
 
-    it('returns the correct body string with multiple jobs', async () => {
+    it('returns the correct content string with multiple jobs', async () => {
       nock.cleanAll()
       nock('https://api.travis-ci.org')
         .get('/builds/123').reply(200, JSON.stringify({
@@ -73,7 +73,7 @@ describe('Travis', () => {
 
       const res = await travis.serialize()
       expect(res.number).toBe(1)
-      expect(res.body).toMatchSnapshot()
+      expect(res.data.content).toMatchSnapshot()
     })
   })
 })
