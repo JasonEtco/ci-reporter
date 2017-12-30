@@ -59,16 +59,10 @@ describe('ci-reporter', () => {
   })
 
   describe('Circle CI', () => {
-    const build = readFile(path.join('circle', 'build.json'))
-    const output = readFile(path.join('circle', 'output.json'))
-    const commit = readFile(path.join('circle', 'commit.json'))
+    let event, build, output, commit
 
-    it('creates the correct comment', async () => {
-      nock('https://circleci.com')
-        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
-        .get('/fake-output-url').reply(200, output)
-
-      const event = {
+    beforeEach(() => {
+      event = {
         event: 'status',
         payload: {
           target_url: 'https://circleci.com/gh/JasonEtco/todo/5?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link',
@@ -81,6 +75,16 @@ describe('ci-reporter', () => {
           installation: { id: 123 }
         }
       }
+
+      build = readFile(path.join('circle', 'build.json'))
+      output = readFile(path.join('circle', 'output.json'))
+      commit = readFile(path.join('circle', 'commit.json'))
+    })
+
+    it('creates the correct comment', async () => {
+      nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
+        .get('/fake-output-url').reply(200, output)
 
       await robot.receive(event)
       const args = github.issues.createComment.mock.calls[0]
@@ -97,20 +101,6 @@ describe('ci-reporter', () => {
       nock('https://circleci.com')
         .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, commit)
         .get('/fake-output-url').reply(200, output)
-
-      const event = {
-        event: 'status',
-        payload: {
-          target_url: 'https://circleci.com/gh/JasonEtco/todo/5?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link',
-          context: 'ci/circleci',
-          state: 'failure',
-          repository: {
-            name: 'todo',
-            owner: { login: 'JasonEtco' }
-          },
-          installation: { id: 123 }
-        }
-      }
 
       await robot.receive(event)
       expect(github.issues.createComment).not.toHaveBeenCalled()
