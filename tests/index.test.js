@@ -4,6 +4,8 @@ const path = require('path')
 const fs = require('fs')
 const ciReporter = require('../lib')
 
+const issuesGet = require('./fixtures/issues.get.json')
+
 const readFile = file => fs.readFileSync(path.join(__dirname, 'fixtures', file), 'utf8')
 
 describe('ci-reporter', () => {
@@ -13,7 +15,9 @@ describe('ci-reporter', () => {
     robot = createRobot()
     github = {
       issues: {
-        createComment: jest.fn()
+        get: jest.fn(() => Promise.resolve({data: {comments: []}})),
+        createComment: jest.fn(),
+        editComment: jest.fn()
       }
     }
 
@@ -47,14 +51,14 @@ describe('ci-reporter', () => {
       }
 
       await robot.receive(event)
+      expect(github.issues.createComment).toHaveBeenCalledTimes(1)
+
       const args = github.issues.createComment.mock.calls[0]
 
       expect(args[0].body).toMatchSnapshot()
       expect(args[0].number).toBe(1)
       expect(args[0].owner).toBe('JasonEtco')
       expect(args[0].repo).toBe('public-test')
-
-      expect(github.issues.createComment).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -87,14 +91,14 @@ describe('ci-reporter', () => {
         .get('/fake-output-url').reply(200, output)
 
       await robot.receive(event)
+      expect(github.issues.createComment).toHaveBeenCalledTimes(1)
+
       const args = github.issues.createComment.mock.calls[0]
 
       expect(args[0].body).toMatchSnapshot()
       expect(args[0].number).toBe(1)
       expect(args[0].owner).toBe('JasonEtco')
       expect(args[0].repo).toBe('todo')
-
-      expect(github.issues.createComment).toHaveBeenCalledTimes(1)
     })
 
     it('does not create a comment if the status is not in a PR', async () => {
@@ -104,6 +108,16 @@ describe('ci-reporter', () => {
 
       await robot.receive(event)
       expect(github.issues.createComment).not.toHaveBeenCalled()
+    })
+
+    it('updates an existing comment', async () => {
+      nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
+        .get('/fake-output-url').reply(200, output)
+
+      github.issues.get.mockReturnValueOnce(Promise.resolve(issuesGet))
+      await robot.receive(event)
+      expect(github.issues.editComment).toHaveBeenCalled()
     })
   })
 
