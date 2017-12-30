@@ -62,20 +62,5 @@ describe('Circle', () => {
       const res = await circle.serialize()
       expect(res).toBeFalsy()
     })
-
-    // it('returns the correct body string with multiple jobs', async () => {
-    //   nock.cleanAll()
-    //   nock('https://api.circle-ci.org')
-    //     .get('/builds/123').reply(200, JSON.stringify({
-    //       build: { pull_request_number: 1 },
-    //       jobs: [{ id: 1234, number: 1, state: 'failed' }, { id: 12345, number: 1, state: 'failed' }]
-    //     }))
-    //     .get('/jobs/1234/log').reply(200, logFile)
-    //     .get('/jobs/12345/log').reply(200, logFile)
-
-    //   const res = await circle.serialize()
-    //   expect(res.number).toBe(1)
-    //   expect(res.body).toMatchSnapshot()
-    // })
   })
 })

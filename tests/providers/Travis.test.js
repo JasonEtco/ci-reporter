@@ -60,20 +60,5 @@ describe('Travis', () => {
       expect(res.number).toBe(1)
       expect(res.data.content).toMatchSnapshot()
     })
-
-    it('returns the correct content string with multiple jobs', async () => {
-      nock.cleanAll()
-      nock('https://api.travis-ci.org')
-        .get('/builds/123').reply(200, JSON.stringify({
-          build: { pull_request_number: 1 },
-          jobs: [{ id: 1234, number: 1, state: 'failed' }, { id: 12345, number: 1, state: 'failed' }]
-        }))
-        .get('/jobs/1234/log').reply(200, log)
-        .get('/jobs/12345/log').reply(200, log)
-
-      const res = await travis.serialize()
-      expect(res.number).toBe(1)
-      expect(res.data.content).toMatchSnapshot()
-    })
   })
 })
