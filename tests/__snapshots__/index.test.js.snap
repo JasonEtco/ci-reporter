@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ci-reporter works with Circle CI 1`] = `
+exports[`ci-reporter Circle CI creates the correct comment 1`] = `
 "✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&#x3D;vcs-integration-link&amp;utm_medium&#x3D;referral&amp;utm_source&#x3D;github-build-link) is failing. Here's the output:
 
 \`\`\`
@@ -82,7 +82,7 @@ standard: Run &#x60;standard --fix&#x60; to automatically fix some problems.
 I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!"
 `;
 
-exports[`ci-reporter works with Travis CI 1`] = `
+exports[`ci-reporter Travis CI creates the correct comment 1`] = `
 "✨ Good work on this PR so far! ✨ Unfortunately, the [Travis CI build](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source&#x3D;github_status&amp;utm_medium&#x3D;notification) is failing. Here's the output:
 
 \`\`\`
