@@ -31,5 +31,14 @@
     "env": [
       "jest"
     ]
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/tests/fixtures/",
+      "<rootDir>/tests/setup.js"
+    ],
+    "setupFiles": [
+      "<rootDir>/tests/setup.js"
+    ]
   }
 }
