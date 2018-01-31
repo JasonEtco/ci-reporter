@@ -15,14 +15,14 @@ describe('Travis', () => {
   describe('buildUri', () => {
     it('creates the correct URI', () => {
       const travis = new Travis()
-      expect(travis.buildUri(317090494)).toBe('https://api.travis-ci.org/builds/317090494')
+      expect(travis.buildUri(317090494)).toBe('https://api.travis-ci.org/build/317090494')
     })
   })
 
   describe('logUri', () => {
     it('creates the correct URI', () => {
       const travis = new Travis()
-      expect(travis.logUri(123)).toBe('https://api.travis-ci.org/jobs/123/log')
+      expect(travis.logUri(123)).toBe('https://api.travis-ci.org/job/123/log')
     })
   })
 
@@ -43,11 +43,11 @@ describe('Travis', () => {
 
     beforeEach(() => {
       nock('https://api.travis-ci.org')
-        .get('/builds/123').reply(200, {
-          build: { pull_request_number: 1 },
+        .get('/build/123').reply(200, {
+          pull_request_number: 1,
           jobs: [{ id: 1234, number: 1, state: 'failed' }]
         })
-        .get('/jobs/1234/log').reply(200, log)
+        .get('/job/1234/log').reply(200, { content: log })
       travis = new Travis({
         payload: {
           target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification'
