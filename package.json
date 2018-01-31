@@ -12,7 +12,7 @@
     "test:update": "jest -u"
   },
   "dependencies": {
-    "probot": "^4.0.0",
+    "probot": "^5.0.0",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5"
   },
@@ -21,6 +21,7 @@
     "localtunnel": "^1.8.2",
     "nock": "^9.1.4",
     "nodemon": "^1.13.2",
+    "smee-client": "^1.0.1",
     "standard": "^10.0.3"
   },
   "engines": {
