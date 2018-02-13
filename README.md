@@ -12,7 +12,7 @@ Currently supports TravisCI and CircleCI. If you're interested in seeing support
 Simply [install the app](https://github.com/apps/ci-reporter) and watch the magic happen as your Pull Requests trigger failure statuses.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/10660468/36135129-22af032a-1057-11e8-925a-d952e1a31105.png" alt="ci-reporter commenting on a PR with failed build log" width="760">
+  <img src="https://user-images.githubusercontent.com/10660468/36135324-78809222-1058-11e8-99cd-6cc100971066.png" alt="ci-reporter commenting on a PR with failed build log" width="760">
 </p>
 
 ## How it works
