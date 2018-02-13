@@ -4,9 +4,8 @@ const path = require('path')
 const fs = require('fs')
 const ciReporter = require('../lib')
 
-const issuesGet = require('./fixtures/issues.get.json')
-
 const readFile = file => fs.readFileSync(path.join(__dirname, 'fixtures', file), 'utf8')
+const commentsGet = require('./fixtures/issues.getComments.json')
 
 describe('ci-reporter', () => {
   let robot, github
@@ -15,7 +14,7 @@ describe('ci-reporter', () => {
     robot = createRobot()
     github = {
       issues: {
-        get: jest.fn(() => Promise.resolve({data: {comments: []}})),
+        getComments: jest.fn(() => Promise.resolve({data: []})),
         createComment: jest.fn(),
         editComment: jest.fn()
       }
@@ -39,7 +38,7 @@ describe('ci-reporter', () => {
       const event = {
         event: 'status',
         payload: {
-          commit: 'b04b9ce383a933ed1a0a7b3de9e1cd31770b380e',
+          sha: 'b04b9ce383a933ed1a0a7b3de9e1cd31770b380e',
           target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification',
           context: 'continuous-integration/travis-ci/pr',
           state: 'failure',
@@ -70,7 +69,7 @@ describe('ci-reporter', () => {
       event = {
         event: 'status',
         payload: {
-          commit: 'b04b9ce383a933ed1a0a7b3de9e1cd31770b380e',
+          sha: 'b04b9ce383a933ed1a0a7b3de9e1cd31770b380e',
           target_url: 'https://circleci.com/gh/JasonEtco/todo/5?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link',
           context: 'ci/circleci',
           state: 'failure',
@@ -117,9 +116,9 @@ describe('ci-reporter', () => {
         .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
         .get('/fake-output-url').reply(200, output)
 
-      github.issues.get.mockReturnValueOnce(Promise.resolve(issuesGet))
+      github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGet))
       await robot.receive(event)
-      expect(github.issues.editComment).toHaveBeenCalled()
+      expect(github.issues.editComment.mock.calls[0][0]).toMatchSnapshot()
     })
   })
 
