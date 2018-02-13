@@ -28,7 +28,7 @@
       "output_url" : "https://circleci.com/fake-output-url",
       "start_time" : "2017-12-25T16:09:56.282Z",
       "background" : false,
-      "exit_code" : 0,
+      "exit_code" : 1,
       "insignificant" : false,
       "canceled" : null,
       "step" : 105,
