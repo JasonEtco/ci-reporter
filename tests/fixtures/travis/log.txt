@@ -1,9 +1,9 @@
 travis_fold:start:worker_info
 [0K[33;1mWorker information[0m
-hostname: 82f33017-4152-4f1f-a1fe-8af760713135@1.i-0090215-production-2-worker-org-ec2.travisci.net
+hostname: 826d7660-6f4f-4268-8124-404c90929cbe@1.i-00e3218-production-2-worker-org-ec2.travisci.net
 version: v3.4.0 https://github.com/travis-ci/worker/tree/ce0440bc30c289a49a9b0c21e4e1e6f7d7825101
-instance: e431077 travisci/ci-garnet:packer-1512502276-986baf0 (via amqp)
-startup: 2.778779733s
+instance: 6dbdb2d travisci/ci-garnet:packer-1512502276-986baf0 (via amqp)
+startup: 565.115238ms
 travis_fold:end:worker_info
 [0Kmode of ‘/usr/local/clang-5.0.0/bin’ changed from 0777 (rwxrwxrwx) to 0775 (rwxrwxr-x)
 travis_fold:start:system_info
@@ -11,10 +11,10 @@ travis_fold:start:system_info
 Build language: node_js
 Build group: stable
 Build dist: trusty
-Build id: 317090494
-Job id: 317090496
-Runtime kernel version: 4.9.6-040906-generic
-travis-build version: dc12c4043
+Build id: 340790660
+Job id: 340790661
+Runtime kernel version: 4.14.12-041412-generic
+travis-build version: 8d2b1ed85
 [34m[1mBuild image provisioning date and time[0m
 Tue Dec  5 20:11:19 UTC 2017
 [34m[1mOperating System Details[0m
@@ -407,14 +407,6 @@ ruby-2.4.1
 travis_fold:end:system_info
 [0K
 removed ‘/etc/apt/sources.list.d/basho_riak.list’
-Executing: /tmp/tmp.3SgFsz3xge/gpg.1.sh --keyserver
-hkp://keyserver.ubuntu.com:80
---recv
-EA312927
-gpg: requesting key EA312927 from hkp server keyserver.ubuntu.com
-gpg: key EA312927: public key "MongoDB 3.2 Release Signing Key <packaging@mongodb.com>" imported
-gpg: Total number processed: 1
-gpg:               imported: 1  (RSA: 1)
 W: http://ppa.launchpad.net/couchdb/stable/ubuntu/dists/trusty/Release.gpg: Signature by key 15866BAFD9BCC4F3C1E0DFC7D69548E1C17EAB57 uses weak digest algorithm (SHA1)
 127.0.0.1	localhost
 ::1	 ip6-localhost ip6-loopback
@@ -422,85 +414,86 @@ fe00::0	ip6-localnet
 ff00::0	ip6-mcastprefix
 ff02::1	ip6-allnodes
 ff02::2	ip6-allrouters
-172.17.0.16	travis-job-jasonetco-public-test-317090496.travisci.net travis-job-jasonetco-public-test-317090496
+172.17.0.5	travis-job-jasonetco-public-test-340790661.travisci.net travis-job-jasonetco-public-test-340790661
 travis_fold:start:git.checkout
-[0Ktravis_time:start:088d5bdc
+[0Ktravis_time:start:0c82a414
 [0K$ git clone --depth=50 https://github.com/JasonEtco/public-test.git JasonEtco/public-test
 Cloning into 'JasonEtco/public-test'...
-remote: Counting objects: 6, done.[K
-remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 6[K
-Unpacking objects:  16% (1/6)   
-Unpacking objects:  33% (2/6)   
-Unpacking objects:  50% (3/6)   
-Unpacking objects:  66% (4/6)   
-Unpacking objects:  83% (5/6)   
-Unpacking objects: 100% (6/6)   
-Unpacking objects: 100% (6/6), done.
+remote: Counting objects: 13, done.[K
+remote: Total 13 (delta 1), reused 1 (delta 1), pack-reused 11[K
+Unpacking objects:   7% (1/13)   
+Unpacking objects:  15% (2/13)   
+Unpacking objects:  23% (3/13)   
+Unpacking objects:  30% (4/13)   
+Unpacking objects:  38% (5/13)   
+Unpacking objects:  46% (6/13)   
+Unpacking objects:  53% (7/13)   
+Unpacking objects:  61% (8/13)   
+Unpacking objects:  69% (9/13)   
+Unpacking objects:  76% (10/13)   
+Unpacking objects:  84% (11/13)   
+Unpacking objects:  92% (12/13)   
+Unpacking objects: 100% (13/13)   
+Unpacking objects: 100% (13/13), done.
 
-travis_time:end:088d5bdc:start=1513367885177093643,finish=1513367885549935610,duration=372841967
+travis_time:end:0c82a414:start=1518492704430562118,finish=1518492704756699178,duration=326137060
 [0K$ cd JasonEtco/public-test
-travis_time:start:229e7a9c
-[0K$ git fetch origin +refs/pull/2/merge:
-remote: Counting objects: 5, done.[K
-remote: Compressing objects:  20% (1/5)   [K
-remote: Compressing objects:  40% (2/5)   [K
-remote: Compressing objects:  60% (3/5)   [K
-remote: Compressing objects:  80% (4/5)   [K
-remote: Compressing objects: 100% (5/5)   [K
-remote: Compressing objects: 100% (5/5), done.[K
-remote: Total 5 (delta 0), reused 4 (delta 0), pack-reused 0[K
-Unpacking objects:  20% (1/5)   
-Unpacking objects:  40% (2/5)   
-Unpacking objects:  60% (3/5)   
-Unpacking objects:  80% (4/5)   
-Unpacking objects: 100% (5/5)   
-Unpacking objects: 100% (5/5), done.
+travis_time:start:01a95b60
+[0K$ git fetch origin +refs/pull/9/merge:
+remote: Counting objects: 4, done.[K
+remote: Compressing objects:  33% (1/3)   [K
+remote: Compressing objects:  66% (2/3)   [K
+remote: Compressing objects: 100% (3/3)   [K
+remote: Compressing objects: 100% (3/3), done.[K
+remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0[K
+Unpacking objects:  25% (1/4)   
+Unpacking objects:  50% (2/4)   
+Unpacking objects:  75% (3/4)   
+Unpacking objects: 100% (4/4)   
+Unpacking objects: 100% (4/4), done.
 From https://github.com/JasonEtco/public-test
- * branch            refs/pull/2/merge -> FETCH_HEAD
+ * branch            refs/pull/9/merge -> FETCH_HEAD
 
-travis_time:end:229e7a9c:start=1513367885556043746,finish=1513367885817167927,duration=261124181
+travis_time:end:01a95b60:start=1518492704765754291,finish=1518492705039204309,duration=273450018
 [0K$ git checkout -qf FETCH_HEAD
 travis_fold:end:git.checkout
 [0K$ export PATH=./node_modules/.bin:$PATH
 [33;1mUpdating nvm[0m
 travis_fold:start:nvm.install
-[0Ktravis_time:start:2ec8d660
-[0K$ nvm install 9
-Downloading and installing node v9.3.0...
-Downloading https://nodejs.org/dist/v9.3.0/node-v9.3.0-linux-x64.tar.xz...
-
-#########                                                                 12.7%
-######################################################################## 100.0%
+[0Ktravis_time:start:061447ba
+[0K$ nvm install 8
+Downloading and installing node v8.9.4...
+Downloading https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.xz...
 Computing checksum with sha256sum
 Checksums matched!
-Now using node v9.3.0 (npm v5.5.1)
+Now using node v8.9.4 (npm v5.6.0)
 
-travis_time:end:2ec8d660:start=1513367894109127850,finish=1513367897069312031,duration=2960184181
+travis_time:end:061447ba:start=1518492711772072918,finish=1518492715579782709,duration=3807709791
 [0Ktravis_fold:end:nvm.install
 [0K$ node --version
-v9.3.0
+v8.9.4
 $ npm --version
-5.5.1
+5.6.0
 $ nvm --version
 0.33.8
 travis_fold:start:install.npm
-[0Ktravis_time:start:017f72a6
+[0Ktravis_time:start:07c54a8e
 [0K$ npm install 
 [37;40mnpm[0m [0m[34;40mnotice[0m[35m[0m created a lockfile as package-lock.json. You should commit this file.
 [0m[37;40mnpm[0m [0m[30;43mWARN[0m[35m[0m public-test@1.0.0 No description
 [0m
-up to date in 0.643s
+up to date in 0.578s
 
-travis_time:end:017f72a6:start=1513367898176112756,finish=1513367899390751334,duration=1214638578
-[0Ktravis_time:start:0453e3c1
+travis_time:end:07c54a8e:start=1518492717292602576,finish=1518492718642818149,duration=1350215573
+[0Ktravis_time:start:1b890d7a
 [0K$ npm ls
 public-test@1.0.0 /home/travis/build/JasonEtco/public-test
 └── (empty)
 
 
-travis_time:end:0453e3c1:start=1513367899632725664,finish=1513367900116992377,duration=484266713
+travis_time:end:1b890d7a:start=1518492719011894785,finish=1518492719881022876,duration=869128091
 [0Ktravis_fold:end:install.npm
-[0Ktravis_time:start:0dcc73d2
+[0Ktravis_time:start:01da490e
 [0K$ npm test
 
 > public-test@1.0.0 test /home/travis/build/JasonEtco/public-test
@@ -509,7 +502,7 @@ travis_time:end:0453e3c1:start=1513367899632725664,finish=1513367900116992377,du
 Error: no test specified
 [37;40mnpm[0m [0m[31;40mERR![0m[35m[0m Test failed.  See above for more details.
 [0m
-travis_time:end:0dcc73d2:start=1513367900122036613,finish=1513367900414957016,duration=292920403
+travis_time:end:01da490e:start=1518492719888410081,finish=1518492720356721160,duration=468311079
 [0K
 [31;1mThe command "npm test" exited with 1.[0m
 
