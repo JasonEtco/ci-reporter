@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ci-reporter Circle CI creates the correct comment 1`] = `
-"✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&#x3D;vcs-integration-link&amp;utm_medium&#x3D;referral&amp;utm_source&#x3D;github-build-link) is failing. Here's the output:
+"### The build is failing
+
+✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&#x3D;vcs-integration-link&amp;utm_medium&#x3D;referral&amp;utm_source&#x3D;github-build-link) is failing. Here's the output:
+
+##### \`npm test\`
 
 \`\`\`
 &gt; todo@1.0.0 test /home/circleci/repo
@@ -87,7 +91,11 @@ I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of
 `;
 
 exports[`ci-reporter Travis CI creates the correct comment 1`] = `
-"✨ Good work on this PR so far! ✨ Unfortunately, the [Travis CI build](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source&#x3D;github_status&amp;utm_medium&#x3D;notification) is failing. Here's the output:
+"### The build is failing
+
+✨ Good work on this PR so far! ✨ Unfortunately, the [Travis CI build](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source&#x3D;github_status&amp;utm_medium&#x3D;notification) is failing. Here's the output:
+
+##### \`npm test\`
 
 \`\`\`
 &gt; public-test@1.0.0 test /home/travis/build/JasonEtco/public-test

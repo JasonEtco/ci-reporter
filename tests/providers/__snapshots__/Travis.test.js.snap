@@ -1,10 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Travis parseLog returns the correct string 1`] = `
-"> public-test@1.0.0 test /home/travis/build/JasonEtco/public-test
+Object {
+  "command": "npm test",
+  "content": "> public-test@1.0.0 test /home/travis/build/JasonEtco/public-test
 > echo \\"Error: no test specified\\" && exit 1
 
-Error: no test specified"
+Error: no test specified",
+}
 `;
 
 exports[`Travis serialize returns the correct body string 1`] = `

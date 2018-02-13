@@ -1,4 +1,8 @@
+### The build is failing
+
 ✨ Good work on this PR so far! ✨ Unfortunately, the [{{ provider }} build]({{ targetUrl }}) is failing. Here's the output:
+
+##### `{{ command }}`
 
 ```
 {{ content }}
