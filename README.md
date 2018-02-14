@@ -17,9 +17,25 @@ Simply [install the app](https://github.com/apps/ci-reporter) and watch the magi
 
 When a build fails, the CI provider will tell GitHub (via a status). GitHub then tells **ci-reporter** about a failed status, and it'll find the part of the build that failed, then comment back on the PR.
 
+
+
+## Configuration
+
+You don't need any configuration for this to work in your project, but if you want the **ci-reporter** to add a new comment on every failed build (instead of updating its original comment, which is the default behaviour) you can create a `.github/ci-reporter.yml` file:
+
+```yml
+updateComment: false
+```
+
+If you need more configuration, please [let me know in a new issue](https://github.com/JasonEtco/ci-reporter/issues/new?title=[Config]&body=Can%20you%20please%20add%20the%20___%20config%20option)
+
+
+
 ## Does it work with _____?
 
 **ci-reporter** currently supports TravisCI and CircleCI. If you're interested in seeing support for another CI tool, please [open an issue!](https://github.com/JasonEtco/ci-reporter/issues/new)
+
+
 
 ## Contributing
 
