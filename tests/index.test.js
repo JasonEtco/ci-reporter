@@ -5,6 +5,8 @@ const fs = require('fs')
 const ciReporter = require('../lib')
 
 const readFile = file => fs.readFileSync(path.join(__dirname, 'fixtures', file), 'utf8')
+const commentsGet = require('./fixtures/issues.getComments.json')
+const commentsGetTwo = require('./fixtures/issues.getComments-two.json')
 
 describe('ci-reporter', () => {
   let robot, github
@@ -13,7 +15,12 @@ describe('ci-reporter', () => {
     robot = createRobot()
     github = {
       issues: {
-        createComment: jest.fn()
+        getComments: jest.fn(() => Promise.resolve({data: []})),
+        createComment: jest.fn(),
+        editComment: jest.fn()
+      },
+      repos: {
+        getContent: jest.fn(() => Promise.resolve({data: { content: '' }}))
       }
     }
 
@@ -35,6 +42,7 @@ describe('ci-reporter', () => {
       const event = {
         event: 'status',
         payload: {
+          sha: 'b04b9ce383a933ed1a0a7b3de9e1cd31770b380e',
           target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification',
           context: 'continuous-integration/travis-ci/pr',
           state: 'failure',
@@ -47,14 +55,14 @@ describe('ci-reporter', () => {
       }
 
       await robot.receive(event)
+      expect(github.issues.createComment).toHaveBeenCalledTimes(1)
+
       const args = github.issues.createComment.mock.calls[0]
 
       expect(args[0].body).toMatchSnapshot()
       expect(args[0].number).toBe(1)
       expect(args[0].owner).toBe('JasonEtco')
       expect(args[0].repo).toBe('public-test')
-
-      expect(github.issues.createComment).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -65,6 +73,7 @@ describe('ci-reporter', () => {
       event = {
         event: 'status',
         payload: {
+          sha: 'b04b9ce383a933ed1a0a7b3de9e1cd31770b380e',
           target_url: 'https://circleci.com/gh/JasonEtco/todo/5?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link',
           context: 'ci/circleci',
           state: 'failure',
@@ -87,14 +96,14 @@ describe('ci-reporter', () => {
         .get('/fake-output-url').reply(200, output)
 
       await robot.receive(event)
+      expect(github.issues.createComment).toHaveBeenCalledTimes(1)
+
       const args = github.issues.createComment.mock.calls[0]
 
       expect(args[0].body).toMatchSnapshot()
       expect(args[0].number).toBe(1)
       expect(args[0].owner).toBe('JasonEtco')
       expect(args[0].repo).toBe('todo')
-
-      expect(github.issues.createComment).toHaveBeenCalledTimes(1)
     })
 
     it('does not create a comment if the status is not in a PR', async () => {
@@ -105,6 +114,40 @@ describe('ci-reporter', () => {
       await robot.receive(event)
       expect(github.issues.createComment).not.toHaveBeenCalled()
     })
+
+    it('updates an existing comment', async () => {
+      nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
+        .get('/fake-output-url').reply(200, output)
+
+      github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGet))
+      await robot.receive(event)
+      expect(github.issues.editComment.mock.calls[0][0]).toMatchSnapshot()
+    })
+
+    it('updates an existing comment twice', async () => {
+      nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5').times(2).reply(200, build)
+        .get('/fake-output-url').times(2).reply(200, output)
+
+      github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGet))
+      await robot.receive(event)
+      github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGetTwo))
+      await robot.receive(event)
+      expect(github.issues.editComment.mock.calls[1][0]).toMatchSnapshot()
+    })
+
+    it('respect the updateComment config', async () => {
+      nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
+        .get('/fake-output-url').reply(200, output)
+
+      github.repos.getContent.mockReturnValueOnce(Promise.resolve({data: {content: Buffer.from('updateComment: false')}}))
+      github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGet))
+      await robot.receive(event)
+      expect(github.issues.createComment).toHaveBeenCalled()
+      expect(github.issues.editComment).not.toHaveBeenCalled()
+    })
   })
 
   it('does nothing if the status context is not accounted for', async () => {
@@ -113,7 +156,11 @@ describe('ci-reporter', () => {
       payload: {
         context: 'i/do/not/exist',
         state: 'failure',
-        installation: { id: 123 }
+        installation: { id: 123 },
+        repository: {
+          name: 'public-test',
+          owner: { login: 'JasonEtco' }
+        }
       }
     }
 
@@ -126,7 +173,11 @@ describe('ci-reporter', () => {
       event: 'status',
       payload: {
         state: 'passed',
-        installation: { id: 123 }
+        installation: { id: 123 },
+        repository: {
+          name: 'public-test',
+          owner: { login: 'JasonEtco' }
+        }
       }
     }
 
