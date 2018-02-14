@@ -122,7 +122,7 @@ describe('ci-reporter', () => {
       expect(github.issues.editComment.mock.calls[0][0]).toMatchSnapshot()
     })
 
-    it('updates an existing comment twice', async () => {
+    it.only('updates an existing comment twice', async () => {
       nock('https://circleci.com')
         .get('/api/v1.1/project/github/JasonEtco/todo/5').times(2).reply(200, build)
         .get('/fake-output-url').times(2).reply(200, output)
