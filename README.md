@@ -33,7 +33,7 @@ If you need more configuration, please [let me know in a new issue](https://gith
 
 ## Does it work with _____?
 
-**ci-reporter** currently supports TravisCI and CircleCI. If you're interested in seeing support for another CI tool, please [open an issue!](https://github.com/JasonEtco/ci-reporter/issues/new)
+**ci-reporter** currently supports TravisCI and CircleCI. If you're interested in seeing support for another CI tool, please [open an issue!](https://github.com/JasonEtco/ci-reporter/issues/new)!
 
 
 
