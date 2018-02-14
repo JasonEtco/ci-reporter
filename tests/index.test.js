@@ -136,6 +136,18 @@ describe('ci-reporter', () => {
       await robot.receive(event)
       expect(github.issues.editComment.mock.calls[1][0]).toMatchSnapshot()
     })
+
+    it('respect the updateComment config', async () => {
+      nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
+        .get('/fake-output-url').reply(200, output)
+
+      github.repos.getContent.mockReturnValueOnce(Promise.resolve({data: {content: Buffer.from('updateComment: false')}}))
+      github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGet))
+      await robot.receive(event)
+      expect(github.issues.createComment).toHaveBeenCalled()
+      expect(github.issues.editComment).not.toHaveBeenCalled()
+    })
   })
 
   it('does nothing if the status context is not accounted for', async () => {
