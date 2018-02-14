@@ -6,6 +6,7 @@ const ciReporter = require('../lib')
 
 const readFile = file => fs.readFileSync(path.join(__dirname, 'fixtures', file), 'utf8')
 const commentsGet = require('./fixtures/issues.getComments.json')
+const commentsGetTwo = require('./fixtures/issues.getComments-two.json')
 
 describe('ci-reporter', () => {
   let robot, github
@@ -119,6 +120,18 @@ describe('ci-reporter', () => {
       github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGet))
       await robot.receive(event)
       expect(github.issues.editComment.mock.calls[0][0]).toMatchSnapshot()
+    })
+
+    it('updates an existing comment twice', async () => {
+      nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5').times(2).reply(200, build)
+        .get('/fake-output-url').times(2).reply(200, output)
+
+      github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGet))
+      await robot.receive(event)
+      github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGetTwo))
+      await robot.receive(event)
+      expect(github.issues.editComment.mock.calls[1][0]).toMatchSnapshot()
     })
   })
 
