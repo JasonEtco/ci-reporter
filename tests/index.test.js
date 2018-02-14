@@ -18,6 +18,9 @@ describe('ci-reporter', () => {
         getComments: jest.fn(() => Promise.resolve({data: []})),
         createComment: jest.fn(),
         editComment: jest.fn()
+      },
+      repos: {
+        getContent: jest.fn(() => Promise.resolve({data: { content: '' }}))
       }
     }
 
@@ -141,7 +144,11 @@ describe('ci-reporter', () => {
       payload: {
         context: 'i/do/not/exist',
         state: 'failure',
-        installation: { id: 123 }
+        installation: { id: 123 },
+        repository: {
+          name: 'public-test',
+          owner: { login: 'JasonEtco' }
+        }
       }
     }
 
@@ -154,7 +161,11 @@ describe('ci-reporter', () => {
       event: 'status',
       payload: {
         state: 'passed',
-        installation: { id: 123 }
+        installation: { id: 123 },
+        repository: {
+          name: 'public-test',
+          owner: { login: 'JasonEtco' }
+        }
       }
     }
 
