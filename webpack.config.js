@@ -1,20 +1,24 @@
 const path = require('path')
 
 module.exports = {
-  entry: ['babel-polyfill', './index.js'],
+  entry: ['babel-polyfill', './src/index.js'],
   target: 'node',
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
-      loaders: ['babel-loader'],
-      include: [
-        __dirname
-      ]
+      use: {
+        loader: 'babel-loader',
+        options: {
+          plugins: [
+            ['transform-object-rest-spread', { useBuiltIns: true }]
+          ]
+        }
+      }
     }]
   },
   output: {
     libraryTarget: 'commonjs',
-    path: path.join(__dirname, '.webpack'),
+    path: path.join(__dirname, 'dist'),
     filename: 'index.js'
   }
 }

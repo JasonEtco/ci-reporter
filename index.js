@@ -1,5 +1,6 @@
-const probot = require('probot-ts')
-const bot = probot(require('./env.json'))
+const createProbot = require('probot-ts')
+const probot = createProbot(require('./env.json'))
+probot.load(require('./dist'))
 
 /**
  * Relay GitHhub events to the bot
@@ -9,7 +10,7 @@ exports.bot = (request, response) => {
   console.log(`Received event ${event}${request.body.action ? ('.' + request.body.action) : ''}`)
   if (event) {
     try {
-      bot.receive({
+      probot.receive({
         event: event,
         payload: request.body
       }).then(() => {
