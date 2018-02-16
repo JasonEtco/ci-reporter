@@ -10,7 +10,8 @@
     "start-dev": "nodemon ./node_modules/probot/bin/probot-run ./lib/index.js",
     "test": "jest --coverage && standard",
     "test:update": "jest -u",
-    "build": "webpack"
+    "build": "webpack -p",
+    "deploy": "npm run build && gcloud beta functions deploy ci-reporter --trigger-http --entry-point bot"
   },
   "dependencies": {
     "probot": "^5.0.0",

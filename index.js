@@ -1,7 +1,13 @@
 const createProbot = require('probot-ts')
-const probot = createProbot(require('./env.json'))
-const plugin = require('./dist')
-probot.load(plugin.bot)
+const fs = require('fs')
+const path = require('path')
+const { bot } = require('./dist')
+
+const settings = require('./env.json')
+settings.cert = fs.readFileSync(path.join(__dirname, 'private-key.pem'), 'utf8')
+
+const probot = createProbot(settings)
+probot.load(bot)
 
 /**
  * Relay GitHub events to the bot

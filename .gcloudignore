@@ -17,9 +17,9 @@ node_modules
 src
 coverage
 .github
+.env
 .env.example
 .travis.yml
-private-key.pem
 README.md
 webpack.config.js
 tests
