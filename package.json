@@ -13,16 +13,21 @@
   },
   "dependencies": {
     "probot": "^5.0.0",
+    "probot-ts": "^4.0.1-typescript",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
     "jest": "^22.2.2",
     "localtunnel": "^1.8.2",
     "nock": "^9.1.4",
     "nodemon": "^1.14.12",
     "smee-client": "^1.0.1",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "webpack": "^3.11.0"
   },
   "engines": {
     "node": ">= 7.7.0",
