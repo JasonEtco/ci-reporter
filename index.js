@@ -4,7 +4,7 @@ const plugin = require('./dist')
 probot.load(plugin.bot)
 
 /**
- * Relay GitHhub events to the bot
+ * Relay GitHub events to the bot
  */
 exports.bot = (request, response) => {
   const event = request.get('x-github-event') || request.get('X-GitHub-Event')

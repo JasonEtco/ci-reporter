@@ -6,3 +6,5 @@ package-lock.json
 coverage
 env.json
 dist
+.DS_Store
+*.zip
