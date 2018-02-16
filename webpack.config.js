@@ -6,17 +6,26 @@ module.exports = {
   module: {
     rules: [{
       test: /\.js$/,
+      include: [
+        __dirname
+      ],
       use: {
         loader: 'babel-loader',
         options: {
+          presets: ['babel-preset-es2015'],
           plugins: [
-            ['transform-object-rest-spread', { useBuiltIns: true }]
+            'transform-async-to-generator',
+            [
+              'transform-object-rest-spread',
+              { useBuiltIns: true }
+            ]
           ]
         }
       }
     }]
   },
   output: {
+    library: 'bot',
     libraryTarget: 'commonjs',
     path: path.join(__dirname, 'dist'),
     filename: 'index.js'

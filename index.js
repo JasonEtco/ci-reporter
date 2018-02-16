@@ -1,6 +1,7 @@
 const createProbot = require('probot-ts')
 const probot = createProbot(require('./env.json'))
-probot.load(require('./dist'))
+const plugin = require('./dist')
+probot.load(plugin.bot)
 
 /**
  * Relay GitHhub events to the bot
