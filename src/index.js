@@ -12,11 +12,10 @@ module.exports = robot => {
   robot.log('App has started!')
 
   robot.on('status', async context => {
-    const config = await context.config('ci-reporter.yml', defaultConfig)
-
     // Only trigger on failed statuses
     if (context.payload.state === 'failure') {
       let serializer
+      const config = await context.config('ci-reporter.yml', defaultConfig)
 
       const { context: statusContext, sha } = context.payload
 
