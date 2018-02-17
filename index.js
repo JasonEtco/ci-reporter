@@ -1,10 +1,8 @@
 const createProbot = require('probot-ts')
-const fs = require('fs')
 const { bot } = require('./dist')
 
 const settings = require('./env.json')
-settings.cert = fs.readFileSync('private-key.pem', 'utf8')
-process.env.APP_NAME = settings.APP_NAME
+process.env.APP_NAME = 'ci-reporter'
 
 const probot = createProbot(settings)
 
