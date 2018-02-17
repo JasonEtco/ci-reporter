@@ -6,8 +6,8 @@
   "license": "ISC",
   "repository": "https://github.com/JasonEtco/ci-viewer.git",
   "scripts": {
-    "start": "probot run ./src/index.js",
-    "start-dev": "nodemon ./node_modules/probot/bin/probot-run ./lib/index.js",
+    "start": "node ./node_modules/probot/bin/probot-run ./src/index.js",
+    "start-dev": "nodemon ./node_modules/probot/bin/probot-run ./src/index.js",
     "test": "jest --coverage && standard",
     "test:update": "jest -u",
     "build": "webpack -p",
