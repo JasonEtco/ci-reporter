@@ -1,12 +1,18 @@
 const createProbot = require('probot-ts')
 const fs = require('fs')
-const path = require('path')
 const { bot } = require('./dist')
 
 const settings = require('./env.json')
-settings.cert = fs.readFileSync(path.join(__dirname, 'private-key.pem'), 'utf8')
+settings.cert = fs.readFileSync('private-key.pem', 'utf8')
+process.env.APP_NAME = settings.APP_NAME
 
 const probot = createProbot(settings)
+
+// Creates a Bunyan Stackdriver Logging client
+const LoggingBunyan = require('@google-cloud/logging-bunyan')
+const loggingBunyan = new LoggingBunyan()
+probot.logger.addStream(loggingBunyan.stream())
+
 probot.load(bot)
 
 /**
