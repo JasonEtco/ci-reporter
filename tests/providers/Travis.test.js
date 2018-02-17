@@ -1,4 +1,4 @@
-const Travis = require('../../lib/providers/Travis')
+const Travis = require('../../src/providers/Travis')
 const nock = require('nock')
 const fs = require('fs')
 const path = require('path')

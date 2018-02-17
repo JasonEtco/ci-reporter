@@ -1,4 +1,4 @@
-const Circle = require('../../lib/providers/Circle')
+const Circle = require('../../src/providers/Circle')
 const nock = require('nock')
 const fs = require('fs')
 const path = require('path')

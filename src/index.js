@@ -1,24 +1,21 @@
 const Travis = require('./providers/Travis')
 const Circle = require('./providers/Circle')
-const fs = require('fs')
-const path = require('path')
 const defaultConfig = require('./default-config.json')
 const newComment = require('./new-comment')
 const updateComment = require('./update-comment')
 
 // We already have an instance of handlebars from Probot's hbs dependency
 const { handlebars } = require('hbs')
-const template = handlebars.compile(fs.readFileSync(path.join(__dirname, 'template.md'), 'utf8'))
+const template = handlebars.compile(require('./template'))
 
 module.exports = robot => {
   robot.log('App has started!')
 
   robot.on('status', async context => {
-    const config = await context.config('ci-reporter.yml', defaultConfig)
-
     // Only trigger on failed statuses
     if (context.payload.state === 'failure') {
       let serializer
+      const config = await context.config('ci-reporter.yml', defaultConfig)
 
       const { context: statusContext, sha } = context.payload
 

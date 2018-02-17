@@ -2,7 +2,7 @@ const {createRobot} = require('probot')
 const nock = require('nock')
 const path = require('path')
 const fs = require('fs')
-const ciReporter = require('../lib')
+const ciReporter = require('../src')
 
 const readFile = file => fs.readFileSync(path.join(__dirname, 'fixtures', file), 'utf8')
 const commentsGet = require('./fixtures/issues.getComments.json')
