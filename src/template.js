@@ -1,6 +1,6 @@
 module.exports = `### The build is failing
 
-✨ Good work on this PR so far! ✨ Unfortunately, the [{{ provider }} build]({{ targetUrl }}) is failing as of {{ commit }}. Here's the output:
+{{ before }}
 
 <!--START_LOG-->
 ##### \`{{ command }}\`
@@ -10,7 +10,7 @@ module.exports = `### The build is failing
 \`\`\`
 <!--END_LOG-->
 
-I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!
+{{ after }}
 
 {{#if lastLog}}
 ---

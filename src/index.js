@@ -33,7 +33,16 @@ module.exports = robot => {
       if (serialized) {
         const { number, data } = serialized
 
-        const opts = { context, template, data, sha, number }
+        const opts = {
+          context,
+          template,
+          data,
+          sha,
+          number,
+          after: handlebars.compile(config.after)({...data, commit: sha}),
+          before: handlebars.compile(config.before)({...data, commit: sha})
+        }
+
         if (config.updateComment) {
           // Determine if there is already a comment on this PR from ci-reporter
           const comments = await context.github.issues.getComments(context.issue({ number }))

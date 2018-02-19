@@ -3,7 +3,7 @@
 exports[`ci-reporter Circle CI creates the correct comment 1`] = `
 "### The build is failing
 
-✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&#x3D;vcs-integration-link&amp;utm_medium&#x3D;referral&amp;utm_source&#x3D;github-build-link) is failing as of b04b9ce383a933ed1a0a7b3de9e1cd31770b380e. Here's the output:
+✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&amp;#x3D;vcs-integration-link&amp;amp;utm_medium&amp;#x3D;referral&amp;amp;utm_source&amp;#x3D;github-build-link) is failing as of b04b9ce383a933ed1a0a7b3de9e1cd31770b380e. Here&#x27;s the output:
 
 <!--START_LOG-->
 ##### \`npm test\`
@@ -85,7 +85,7 @@ standard: Run \`standard --fix\` to automatically fix some problems.
 \`\`\`
 <!--END_LOG-->
 
-I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!
+I&#x27;m sure you can fix it! If you need help, don&#x27;t hesitate to ask a maintainer of the project!
 
 
 
@@ -102,7 +102,7 @@ exports[`ci-reporter Circle CI updates an existing comment 1`] = `
 Object {
   "body": "### The build is failing
 
-✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&#x3D;vcs-integration-link&amp;utm_medium&#x3D;referral&amp;utm_source&#x3D;github-build-link) is failing as of b04b9ce383a933ed1a0a7b3de9e1cd31770b380e. Here's the output:
+✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&amp;#x3D;vcs-integration-link&amp;amp;utm_medium&amp;#x3D;referral&amp;amp;utm_source&amp;#x3D;github-build-link) is failing as of b04b9ce383a933ed1a0a7b3de9e1cd31770b380e. Here&#x27;s the output:
 
 <!--START_LOG-->
 ##### \`npm test\`
@@ -184,7 +184,7 @@ standard: Run \`standard --fix\` to automatically fix some problems.
 \`\`\`
 <!--END_LOG-->
 
-I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!
+I&#x27;m sure you can fix it! If you need help, don&#x27;t hesitate to ask a maintainer of the project!
 
 ---
 <!--START_OLD_LOGS-->
@@ -225,7 +225,7 @@ exports[`ci-reporter Circle CI updates an existing comment twice 1`] = `
 Object {
   "body": "### The build is failing
 
-✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&#x3D;vcs-integration-link&amp;utm_medium&#x3D;referral&amp;utm_source&#x3D;github-build-link) is failing as of b04b9ce383a933ed1a0a7b3de9e1cd31770b380e. Here's the output:
+✨ Good work on this PR so far! ✨ Unfortunately, the [Circle CI build](https://circleci.com/gh/JasonEtco/todo/5?utm_campaign&amp;#x3D;vcs-integration-link&amp;amp;utm_medium&amp;#x3D;referral&amp;amp;utm_source&amp;#x3D;github-build-link) is failing as of b04b9ce383a933ed1a0a7b3de9e1cd31770b380e. Here&#x27;s the output:
 
 <!--START_LOG-->
 ##### \`npm test\`
@@ -307,7 +307,7 @@ standard: Run \`standard --fix\` to automatically fix some problems.
 \`\`\`
 <!--END_LOG-->
 
-I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!
+I&#x27;m sure you can fix it! If you need help, don&#x27;t hesitate to ask a maintainer of the project!
 
 ---
 <!--START_OLD_LOGS-->
@@ -434,7 +434,7 @@ standard: Run \`standard --fix\` to automatically fix some problems.
 exports[`ci-reporter Travis CI creates the correct comment 1`] = `
 "### The build is failing
 
-✨ Good work on this PR so far! ✨ Unfortunately, the [Travis CI build](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source&#x3D;github_status&amp;utm_medium&#x3D;notification) is failing as of b04b9ce383a933ed1a0a7b3de9e1cd31770b380e. Here's the output:
+✨ Good work on this PR so far! ✨ Unfortunately, the [Travis CI build](https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source&amp;#x3D;github_status&amp;amp;utm_medium&amp;#x3D;notification) is failing as of b04b9ce383a933ed1a0a7b3de9e1cd31770b380e. Here&#x27;s the output:
 
 <!--START_LOG-->
 ##### \`npm test\`
@@ -447,7 +447,7 @@ Error: no test specified
 \`\`\`
 <!--END_LOG-->
 
-I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!
+I&#x27;m sure you can fix it! If you need help, don&#x27;t hesitate to ask a maintainer of the project!
 
 
 
