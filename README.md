@@ -21,13 +21,20 @@ When a build fails, the CI provider will tell GitHub (via a status). GitHub then
 
 ## Configuration
 
-You don't need any configuration for this to work in your project, but if you want the **ci-reporter** to add a new comment on every failed build (instead of updating its original comment, which is the default behaviour) you can create a `.github/ci-reporter.yml` file:
+You don't need any configuration for this to work in your project but you can customize a few things to fit your needs. You can create a `.github/ci-reporter.yml` file:
 
 ```yml
-updateComment: false
+# Set to false to create a new comment instead of updating the app's first one
+updateComment: true
+
+# Use a custom string, or set to false to disable
+before: "✨ Good work on this PR so far! ✨ Unfortunately, the [{{ provider }} build]({{ targetUrl }}) is failing as of {{ commit }}. Here's the output:"
+
+# Use a custom string, or set to false to disable
+after: "I'm sure you can fix it! If you need help, don't hesitate to ask a maintainer of the project!"
 ```
 
-If you need more configuration, please [let me know in a new issue](https://github.com/JasonEtco/ci-reporter/issues/new?title=[Config]&body=Can%20you%20please%20add%20the%20___%20config%20option)
+If you need more configuration, please [let me know in a new issue](https://github.com/JasonEtco/ci-reporter/issues/new?title=[Config]&body=Can%20you%20please%20add%20the%20___%20config%20option).
 
 
 
