@@ -39,8 +39,8 @@ module.exports = robot => {
           data,
           sha,
           number,
-          after: handlebars.compile(config.after)({...data, commit: sha}),
-          before: handlebars.compile(config.before)({...data, commit: sha})
+          after: config.after && handlebars.compile(config.after)({...data, commit: sha}),
+          before: config.before && handlebars.compile(config.before)({...data, commit: sha})
         }
 
         if (config.updateComment) {

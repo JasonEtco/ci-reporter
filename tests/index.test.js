@@ -106,6 +106,16 @@ describe('ci-reporter', () => {
       expect(args[0].repo).toBe('todo')
     })
 
+    it('creates the correct comment with before/after disabled', async () => {
+      nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
+        .get('/fake-output-url').reply(200, output)
+
+      github.repos.getContent.mockReturnValueOnce(Promise.resolve({ data: {content: Buffer.from('after: false\nbefore: false')} }))
+      await robot.receive(event)
+      expect(github.issues.createComment.mock.calls[0][0].body).toMatchSnapshot()
+    })
+
     it('does not create a comment if the status is not in a PR', async () => {
       nock('https://circleci.com')
         .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, commit)
