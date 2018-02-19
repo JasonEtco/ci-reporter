@@ -1,7 +1,9 @@
 module.exports = `### The build is failing
+{{#if before}}
 
 {{ before }}
 
+{{/if}}
 <!--START_LOG-->
 ##### \`{{ command }}\`
 
@@ -9,9 +11,11 @@ module.exports = `### The build is failing
 {{{ content }}}
 \`\`\`
 <!--END_LOG-->
+{{#if after}}
 
 {{ after }}
 
+{{/if}}
 {{#if lastLog}}
 ---
 <!--START_OLD_LOGS-->
