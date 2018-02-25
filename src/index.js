@@ -9,9 +9,9 @@ const { handlebars } = require('hbs')
 const template = handlebars.compile(require('./template'))
 
 module.exports = robot => {
-  robot.log('App has started!')
-
   robot.on('status', async context => {
+    const { owner, repo } = context.repo()
+
     // Only trigger on failed statuses
     if (context.payload.state === 'failure') {
       let serializer
@@ -51,10 +51,12 @@ module.exports = robot => {
           // If there is, edit that one
           if (comment) {
             opts.comment = comment
+            context.log(`Updating comment ${owner}/${repo} #${number}`)
             return updateComment(opts)
           }
         }
 
+        context.log(`Creating comment ${owner}/${repo} #${number}`)
         return newComment(opts)
       }
     }
