@@ -11,23 +11,23 @@ exports[`Circle serialize returns the correct content string 1`] = `
 "> todo@1.0.0 test /home/circleci/repo
 > jest && codecov && standard
 
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mmetadata.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mgenerate-blob-link.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mreopen-closed.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mcommit-is-in-pr.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mgenerate-label.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/lib/[22m[1mgenerate-body.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mlanguages.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1minstallation.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mpr-comments.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mmerge-handler.js[22m
-[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mopen-issues.js[22m
-[999D[K
-[1mTest Suites: [22m[1m[32m11 passed[39m[22m, 11 total
-[1mTests:       [22m[1m[32m70 passed[39m[22m, 70 total
-[1mSnapshots:   [22m0 total
-[1mTime:[22m        4.335s
-[2mRan all test suites[22m[2m.[22m
+ PASS  __tests__/lib/metadata.js
+ PASS  __tests__/lib/generate-blob-link.js
+ PASS  __tests__/lib/reopen-closed.js
+ PASS  __tests__/lib/commit-is-in-pr.js
+ PASS  __tests__/lib/generate-label.js
+ PASS  __tests__/lib/generate-body.js
+ PASS  __tests__/languages.js
+ PASS  __tests__/installation.js
+ PASS  __tests__/pr-comments.js
+ PASS  __tests__/merge-handler.js
+ PASS  __tests__/open-issues.js
+
+Test Suites: 11 passed, 11 total
+Tests:       70 passed, 70 total
+Snapshots:   0 total
+Time:        4.335s
+Ran all test suites.
 --------------------------------|----------|----------|----------|----------|----------------|
 File                            |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
 --------------------------------|----------|----------|----------|----------|----------------|

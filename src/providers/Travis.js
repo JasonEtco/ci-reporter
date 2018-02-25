@@ -1,4 +1,5 @@
 const request = require('request-promise-native')
+const stripAnsi = require('strip-ansi')
 
 class Travis {
   constructor (context) {
@@ -47,7 +48,7 @@ class Travis {
       number: buildJson.pull_request_number,
       data: {
         provider: 'Travis CI',
-        content,
+        content: stripAnsi(content),
         targetUrl,
         command
       }

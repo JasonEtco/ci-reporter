@@ -1,4 +1,5 @@
 const request = require('request-promise-native')
+const stripAnsi = require('strip-ansi')
 
 class Circle {
   constructor (context) {
@@ -63,7 +64,7 @@ class Circle {
         data: {
           provider: 'Circle CI',
           command: failedStep.name,
-          content,
+          content: stripAnsi(content),
           targetUrl
         }
       }
