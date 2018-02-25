@@ -20,11 +20,13 @@ module.exports = robot => {
       const { context: statusContext, sha } = context.payload
 
       if (statusContext === Travis.ctx) {
+        context.log(`Creating TravisCI instance for ${context.id}`)
         serializer = new Travis(context)
       } else if (statusContext === Circle.ctx) {
+        context.log(`Creating CircleCI instance for ${context.id}`)
         serializer = new Circle(context)
       } else {
-        robot.log(`ctx does not exist: ${statusContext}`)
+        context.log(`ctx does not exist: ${statusContext}`)
         return
       }
 
