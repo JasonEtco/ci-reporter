@@ -2,12 +2,10 @@
   <img src="https://avatars2.githubusercontent.com/in/8035?s=128&v=4" width="64">
   <h3 align="center">ci-reporter</h3>
   <p align="center">A GitHub App built with <a href="https://github.com/probot/probot">Probot</a> that pastes the error output of a failing commit into the relevant PR<p>
-  <p align="center"><a href="https://travis-ci.org/JasonEtco/ci-reporter"><img src="https://img.shields.io/travis/JasonEtco/ci-reporter/master.svg" alt="Build Status"></a> <a href="https://codecov.io/gh/JasonEtco/ci-reporter/"><img src="https://img.shields.io/codecov/c/github/JasonEtco/ci-reporter.svg" alt="Codecov"></a></p>
+  <p align="center"><a href="https://travis-ci.org/JasonEtco/ci-reporter"><img src="https://img.shields.io/travis/JasonEtco/ci-reporter/master.svg" alt="Build Status"></a> <a href="https://codecov.io/gh/JasonEtco/ci-reporter/"><img src="https://img.shields.io/codecov/c/github/JasonEtco/ci-reporter.svg" alt="Codecov"></a><a href="https://greenkeeper.io"><img src="https://badges.greenkeeper.io/JasonEtco/ci-reporter.svg" alt="Greenkeeper enabled"></a></p>
 </p>
 
 ## Usage
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/JasonEtco/ci-reporter.svg)](https://greenkeeper.io/)
 
 Simply [install the app](https://github.com/apps/ci-reporter) and watch the magic happen as your Pull Requests trigger failure statuses.
 
