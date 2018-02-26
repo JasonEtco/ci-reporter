@@ -68,11 +68,11 @@ describe('Travis', () => {
 
     it('returns false if there is no match in the log', async () => {
       nock('https://api.travis-ci.org')
-      .get('/build/123').reply(200, {
-        pull_request_number: 1,
-        jobs: [{ id: 1234, number: 1, state: 'failed' }]
-      })
-      .get('/job/1234/log').reply(200, { content: 'Hello!' })
+        .get('/build/123').reply(200, {
+          pull_request_number: 1,
+          jobs: [{ id: 1234, number: 1, state: 'failed' }]
+        })
+        .get('/job/1234/log').reply(200, { content: 'Hello!' })
       const res = await travis.serialize()
       expect(res).toBeFalsy()
     })
