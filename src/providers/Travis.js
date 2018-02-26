@@ -18,6 +18,10 @@ class Travis {
     const reg = /(\[0K\$\s)(?![\s\S]+\1)(.+)(?:\r\n|\n)*([\s\S]+)[\r\n]+.*Test failed\./g
     const result = reg.exec(log)
 
+    if (!result) {
+      return false
+    }
+
     const command = result[2]
     let content = result[3].trim()
     return { command, content }
@@ -42,15 +46,18 @@ class Travis {
       headers
     })
 
-    const { command, content } = this.parseLog(res.content)
+    const result = this.parseLog(res.content)
 
-    return {
-      number: buildJson.pull_request_number,
-      data: {
-        provider: 'Travis CI',
-        content: stripAnsi(content),
-        targetUrl,
-        command
+    if (result) {
+      const { content, command } = result
+      return {
+        number: buildJson.pull_request_number,
+        data: {
+          provider: 'Travis CI',
+          content: stripAnsi(content),
+          targetUrl,
+          command
+        }
       }
     }
   }
