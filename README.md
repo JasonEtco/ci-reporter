@@ -7,6 +7,8 @@
 
 ## Usage
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/JasonEtco/ci-reporter.svg)](https://greenkeeper.io/)
+
 Simply [install the app](https://github.com/apps/ci-reporter) and watch the magic happen as your Pull Requests trigger failure statuses.
 
 <p align="center">
