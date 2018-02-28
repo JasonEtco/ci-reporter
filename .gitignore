@@ -8,3 +8,4 @@ env.json
 dist
 .DS_Store
 *.zip
+.firebaserc

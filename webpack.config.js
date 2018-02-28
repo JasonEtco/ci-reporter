@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: ['babel-polyfill', './functions/src/index.js'],
   target: 'node',
   module: {
     rules: [{
@@ -27,7 +27,7 @@ module.exports = {
   output: {
     library: 'bot',
     libraryTarget: 'commonjs',
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'functions', 'dist'),
     filename: 'index.js'
   }
 }

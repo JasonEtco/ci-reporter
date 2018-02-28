@@ -1,4 +1,6 @@
+const functions = require('firebase-functions')
 const createProbot = require('probot-ts')
+
 const { bot } = require('./dist')
 
 const settings = require('./env.json')
@@ -13,10 +15,7 @@ probot.logger.addStream(loggingBunyan.stream())
 
 probot.load(bot)
 
-/**
- * Relay GitHub events to the bot
- */
-exports.bot = (request, response) => {
+exports.bot = functions.https.onRequest((request, response) => {
   const event = request.get('x-github-event') || request.get('X-GitHub-Event')
   const id = request.get('x-github-delivery') || request.get('X-GitHub-Delivery')
   console.log(`Received event ${event}${request.body.action ? ('.' + request.body.action) : ''}`)
@@ -42,4 +41,4 @@ exports.bot = (request, response) => {
     console.error(request)
     response.sendStatus(400)
   }
-}
+})
