@@ -3,17 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>ci-reporter</title>
+    <link rel="stylesheet" href="./primer.css">
   </head>
-  <body>
-    <div id="message">
-      <h1>ENCODE</h1>
-      <form>
-        <input type="text" placeholder="Your API Key" required />
-        <button type="submit">Submit</button>
-      </form>
+  <body class="bg-gray px-3 py-6 text-center">
+    <div class="mx-auto" style="max-width: 510px">
+      <img src="https://avatars2.githubusercontent.com/in/8035?s=88&v=4" width="44" height="44" alt="ci-reporter" class="avatar mb-4" />
+      <div class="Box box-shadow mx-auto p-4">
+        <h1 class="h3">API Key Encoder</h1>
+        <p class="note">Encode your CI provider's API key so that you can safely store it in your repository, but still use <strong>ci-reporter</strong> on private repositories.</p>
+        <form class="my-4">
+          <div class="input-group">
+            <input class="form-control" type="text" placeholder="API Key" aria-label="API Key">
+            <span class="input-group-button">
+              <button class="btn" type="submit">Submit</button>
+            </span>
+          </div>
+        </form>
 
-      <pre class="result"></pre>
+        <textarea
+          class="rounded-2 border result p-2 mb-4 mono-font wb-break-all width-full"
+          style="display: none; resize: none;"
+          onfocus="this.select()"
+          rows="5"
+        >
+        </textarea>
+
+        <a href="https://github.com/jasonetco/ci-reporter#private-repos" class="f6">Where do I put this?</a>
+      </div>
     </div>
 
     <script>
@@ -28,6 +45,7 @@
             return res.json()
           })
           .then(function (json) {
+            result.style.display = 'block'
             result.textContent = json.body
           })
       })
