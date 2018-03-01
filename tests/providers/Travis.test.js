@@ -36,18 +36,16 @@ describe('Travis', () => {
     it('returns the correct string', () => {
       expect(travis.parseLog(log)).toMatchSnapshot()
     })
+
+    it('returns false if there are no matches', () => {
+      expect(travis.parseLog('Hello!')).toBe(false)
+    })
   })
 
   describe('serialize', () => {
     let travis
 
     beforeEach(() => {
-      nock('https://api.travis-ci.org')
-        .get('/build/123').reply(200, {
-          pull_request_number: 1,
-          jobs: [{ id: 1234, number: 1, state: 'failed' }]
-        })
-        .get('/job/1234/log').reply(200, { content: log })
       travis = new Travis({
         payload: {
           target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification'
@@ -56,9 +54,27 @@ describe('Travis', () => {
     })
 
     it('returns the correct body string', async () => {
+      nock('https://api.travis-ci.org')
+        .get('/build/123').reply(200, {
+          pull_request_number: 1,
+          jobs: [{ id: 1234, number: 1, state: 'failed' }]
+        })
+        .get('/job/1234/log').reply(200, { content: log })
+
       const res = await travis.serialize()
       expect(res.number).toBe(1)
       expect(res.data.content).toMatchSnapshot()
+    })
+
+    it('returns false if there is no match in the log', async () => {
+      nock('https://api.travis-ci.org')
+        .get('/build/123').reply(200, {
+          pull_request_number: 1,
+          jobs: [{ id: 1234, number: 1, state: 'failed' }]
+        })
+        .get('/job/1234/log').reply(200, { content: 'Hello!' })
+      const res = await travis.serialize()
+      expect(res).toBeFalsy()
     })
   })
 })
