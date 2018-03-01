@@ -4,7 +4,7 @@ const stripAnsi = require('strip-ansi')
 class Travis {
   constructor (context, token) {
     this.context = context
-    this.param = token ? `?circle-token=${token}` : ''
+    this.token = token
   }
 
   static get ctx () {
@@ -26,6 +26,9 @@ class Travis {
 
   async serialize () {
     const headers = { 'Travis-API-Version': 3 }
+    if (this.token) {
+      headers.Authorization = `token ${this.token}`
+    }
 
     const { target_url: targetUrl } = this.context.payload
     const build = /\/builds\/(\d+)/g.exec(targetUrl)[1]
