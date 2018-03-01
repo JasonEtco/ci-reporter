@@ -1,8 +1,10 @@
+const jwt = require('jsonwebtoken')
 const Travis = require('./providers/Travis')
 const Circle = require('./providers/Circle')
 const defaultConfig = require('./default-config.json')
 const newComment = require('./new-comment')
 const updateComment = require('./update-comment')
+const { cert } = require('../env.json')
 
 // We already have an instance of handlebars from Probot's hbs dependency
 const { handlebars } = require('hbs')
@@ -21,10 +23,12 @@ module.exports = robot => {
 
       if (statusContext === Travis.ctx) {
         context.log(`Creating TravisCI instance for ${context.id}`)
-        serializer = new Travis(context)
+        const token = jwt.verify(config.travisToken, cert)
+        serializer = new Travis(context, token)
       } else if (statusContext === Circle.ctx) {
         context.log(`Creating CircleCI instance for ${context.id}`)
-        serializer = new Circle(context)
+        const token = jwt.verify(config.circleToken, cert)
+        serializer = new Circle(context, token)
       } else {
         context.log(`ctx does not exist: ${statusContext}`)
         return

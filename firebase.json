@@ -15,6 +15,10 @@
         "function": "bot"
       },
       {
+        "source": "/encode",
+        "function": "encode"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

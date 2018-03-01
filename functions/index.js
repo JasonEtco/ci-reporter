@@ -1,5 +1,6 @@
 const functions = require('firebase-functions')
 const createProbot = require('probot-ts')
+const jwt = require('jsonwebtoken')
 
 const { bot } = require('./dist')
 
@@ -41,4 +42,13 @@ exports.bot = functions.https.onRequest((request, response) => {
     console.error(request)
     response.sendStatus(400)
   }
+})
+
+exports.encode = functions.https.onRequest((request, response) => {
+  const token = jwt.sign(request.body, settings.cert)
+
+  response.send({
+    statusCode: 200,
+    body: token
+  })
 })
