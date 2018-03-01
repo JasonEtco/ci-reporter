@@ -16,18 +16,20 @@ module.exports = robot => {
 
     // Only trigger on failed statuses
     if (context.payload.state === 'failure') {
-      let serializer
+      let serializer, token
       const config = await context.config('ci-reporter.yml', defaultConfig)
 
       const { context: statusContext, sha } = context.payload
 
       if (statusContext === Travis.ctx) {
         context.log(`Creating TravisCI instance for ${context.id}`)
-        const token = jwt.verify(config.travisToken, cert)
+
+        if (config.travisToken) jwt.verify(config.travisToken, cert)
         serializer = new Travis(context, token)
       } else if (statusContext === Circle.ctx) {
         context.log(`Creating CircleCI instance for ${context.id}`)
-        const token = jwt.verify(config.circleToken, cert)
+
+        if (config.circleToken) jwt.verify(config.circleToken, cert)
         serializer = new Circle(context, token)
       } else {
         context.log(`ctx does not exist: ${statusContext}`)
