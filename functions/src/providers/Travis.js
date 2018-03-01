@@ -2,16 +2,17 @@ const request = require('request-promise-native')
 const stripAnsi = require('strip-ansi')
 
 class Travis {
-  constructor (context) {
+  constructor (context, token) {
     this.context = context
+    this.param = token ? `?circle-token=${token}` : ''
   }
 
   static get ctx () {
     return 'continuous-integration/travis-ci/pr'
   }
 
-  buildUri (build) { return `https://api.travis-ci.org/build/${build}` }
-  logUri (job) { return `https://api.travis-ci.org/job/${job}/log` }
+  buildUri (build) { return `https://api.travis-ci.org/build/${build}${this.param}` }
+  logUri (job) { return `https://api.travis-ci.org/job/${job}/log${this.param}` }
 
   parseLog (log) {
     // sp00ky RegExp to start the extraction

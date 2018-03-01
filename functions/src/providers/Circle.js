@@ -2,15 +2,16 @@ const request = require('request-promise-native')
 const stripAnsi = require('strip-ansi')
 
 class Circle {
-  constructor (context) {
+  constructor (context, token) {
     this.context = context
+    this.param = token ? `?circle-token=${token}` : ''
   }
 
   static get ctx () {
     return 'ci/circleci'
   }
 
-  buildUri ({ owner, repo }, build) { return `https://circleci.com/api/v1.1/project/github/${owner}/${repo}/${build}` }
+  buildUri ({ owner, repo }, build) { return `https://circleci.com/api/v1.1/project/github/${owner}/${repo}/${build}${this.param}` }
 
   parseLog (log) {
     // sp00ky RegExp to start the extraction
