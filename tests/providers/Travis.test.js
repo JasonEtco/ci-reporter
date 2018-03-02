@@ -39,7 +39,7 @@ describe('Travis', () => {
   })
 
   describe('serialize', () => {
-    let travis
+    let travis, context
 
     beforeEach(() => {
       nock('https://api.travis-ci.org')
@@ -48,11 +48,14 @@ describe('Travis', () => {
           jobs: [{ id: 1234, number: 1, state: 'failed' }]
         })
         .get('/job/1234/log').reply(200, { content: log })
-      travis = new Travis({
+
+      context = {
         payload: {
           target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification'
         }
-      })
+      }
+
+      travis = new Travis(context)
     })
 
     it('returns the correct body string', async () => {
@@ -70,11 +73,7 @@ describe('Travis', () => {
         }).matchHeader('Authorization', 'token 123')
         .get('/job/1234/log').reply(200, { content: log }).matchHeader('Authorization', 'token 123')
 
-      const privateTravis = new Travis({
-        payload: {
-          target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification'
-        }
-      }, 123)
+      const privateTravis = new Travis(context, 123)
 
       await privateTravis.serialize()
       expect(scoped.isDone()).toBeTruthy()
