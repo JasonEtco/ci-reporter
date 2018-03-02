@@ -25,7 +25,7 @@ module.exports = robot => {
 
     // Only trigger on failed statuses
     if (context.payload.state === 'failure') {
-      let serializer
+      let serializer, tokenType
       const config = await context.config('ci-reporter.yml', defaultConfig)
 
       const { context: statusContext, sha } = context.payload
@@ -33,15 +33,22 @@ module.exports = robot => {
       switch (statusContext) {
         case Travis.ctx:
           context.log(`Creating TravisCI instance for ${context.id}`)
-          serializer = new Travis(context, getToken('travis', config))
+          tokenType = 'travis'
+          serializer = new Travis(context, getToken(tokenType, config))
           break
         case Circle.ctx:
           context.log(`Creating CircleCI instance for ${context.id}`)
-          serializer = new Circle(context, getToken('circle', config))
+          tokenType = 'circle'
+          serializer = new Circle(context, getToken(tokenType, config))
           break
         default:
           context.log(`ctx does not exist: ${statusContext}`)
           return
+      }
+
+      if (context.payload.repository.private && !config.tokens[tokenType]) {
+        context.log(`Private repo ${owner}/${repo} does not have an API key for ${tokenType}`)
+        return
       }
 
       // Will return false if something borks
