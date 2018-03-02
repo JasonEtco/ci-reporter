@@ -11,9 +11,12 @@ const { handlebars } = require('hbs')
 const template = handlebars.compile(require('./template'))
 
 function getToken (type, config) {
-  return config.tokens[type]
-    ? jwt.verify(config.tokens[type], cert)
-    : false
+  if (config.tokens[type]) {
+    try {
+      return jwt.verify(config.tokens[type], cert)
+    } catch (e) {}
+  }
+  return false
 }
 
 module.exports = robot => {
