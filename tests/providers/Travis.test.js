@@ -60,5 +60,24 @@ describe('Travis', () => {
       expect(res.number).toBe(1)
       expect(res.data.content).toMatchSnapshot()
     })
+
+    it('uses the API token in a header', async () => {
+      nock.cleanAll()
+      const scoped = nock('https://api.travis-ci.org')
+        .get('/build/123').reply(200, {
+          pull_request_number: 1,
+          jobs: [{ id: 1234, number: 1, state: 'failed' }]
+        }).matchHeader('Authorization', 'token 123')
+        .get('/job/1234/log').reply(200, { content: log }).matchHeader('Authorization', 'token 123')
+
+      const privateTravis = new Travis({
+        payload: {
+          target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification'
+        }
+      }, 123)
+
+      await privateTravis.serialize()
+      expect(scoped.isDone()).toBeTruthy()
+    })
   })
 })
