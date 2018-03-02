@@ -9,9 +9,10 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "@google-cloud/logging-bunyan": "^0.7.0",
     "firebase-admin": "~5.8.1",
     "firebase-functions": "^0.8.1",
-    "@google-cloud/logging-bunyan": "^0.7.0",
+    "jsonwebtoken": "^8.1.1",
     "probot-ts": "^4.0.1-typescript"
   },
   "private": true
