@@ -10,30 +10,35 @@ const { cert } = require('../env.json')
 const { handlebars } = require('hbs')
 const template = handlebars.compile(require('./template'))
 
+function getToken (type, config) {
+  return config.tokens[type]
+    ? jwt.verify(config.tokens[type], cert)
+    : false
+}
+
 module.exports = robot => {
   robot.on('status', async context => {
     const { owner, repo } = context.repo()
 
     // Only trigger on failed statuses
     if (context.payload.state === 'failure') {
-      let serializer, token
+      let serializer
       const config = await context.config('ci-reporter.yml', defaultConfig)
 
       const { context: statusContext, sha } = context.payload
 
-      if (statusContext === Travis.ctx) {
-        context.log(`Creating TravisCI instance for ${context.id}`)
-
-        if (config.travisToken) jwt.verify(config.travisToken, cert)
-        serializer = new Travis(context, token)
-      } else if (statusContext === Circle.ctx) {
-        context.log(`Creating CircleCI instance for ${context.id}`)
-
-        if (config.circleToken) jwt.verify(config.circleToken, cert)
-        serializer = new Circle(context, token)
-      } else {
-        context.log(`ctx does not exist: ${statusContext}`)
-        return
+      switch (statusContext) {
+        case Travis.ctx:
+          context.log(`Creating TravisCI instance for ${context.id}`)
+          serializer = new Travis(context, getToken('travis', config))
+          break
+        case Circle.ctx:
+          context.log(`Creating CircleCI instance for ${context.id}`)
+          serializer = new Circle(context, getToken('circle', config))
+          break
+        default:
+          context.log(`ctx does not exist: ${statusContext}`)
+          return
       }
 
       // Will return false if something borks
