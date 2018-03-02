@@ -3,6 +3,7 @@ const nock = require('nock')
 const path = require('path')
 const fs = require('fs')
 const ciReporter = require('../functions/src')
+const jwt = require('jsonwebtoken')
 
 const readFile = file => fs.readFileSync(path.join(__dirname, 'fixtures', file), 'utf8')
 const commentsGet = require('./fixtures/issues.getComments.json')
@@ -153,6 +154,17 @@ describe('ci-reporter', () => {
       await robot.receive(event)
       expect(github.issues.createComment).toHaveBeenCalled()
       expect(github.issues.editComment).not.toHaveBeenCalled()
+    })
+
+    it('uses token from the config file', async () => {
+      const cert = '1234567890'
+      const token = jwt.sign('hello', cert)
+
+      const config = 'tokens:\n  circle: ' + token
+      github.repos.getContent.mockReturnValueOnce(Promise.resolve({data: {content: Buffer.from(config)}}))
+
+      await robot.receive(event)
+      expect(github.issues.createComment).toHaveBeenCalled()
     })
   })
 
