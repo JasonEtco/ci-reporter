@@ -30,22 +30,23 @@ describe('Circle', () => {
   })
 
   describe('serialize', () => {
-    let circle
+    let circle, context
+    const build = readFile('build.json')
+    const output = readFile('output.json')
 
     beforeEach(() => {
-      const build = readFile('build.json')
-      const output = readFile('output.json')
-
       nock('https://circleci.com')
         .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
         .get('/fake-output-url').reply(200, output)
 
-      circle = new Circle({
+      context = {
         payload: {
           target_url: 'https://circleci.com/gh/JasonEtco/todo/5?utm_source=github_status&utm_medium=notification'
         },
         repo: () => ({ owner: 'JasonEtco', repo: 'todo' })
-      })
+      }
+
+      circle = new Circle(context)
     })
 
     it('returns the correct content string', async () => {
@@ -61,6 +62,17 @@ describe('Circle', () => {
 
       const res = await circle.serialize()
       expect(res).toBeFalsy()
+    })
+
+    it('uses the API token as a query param', async () => {
+      nock.cleanAll()
+      const scoped = nock('https://circleci.com')
+        .get('/api/v1.1/project/github/JasonEtco/todo/5?circle-token=123').reply(200, build)
+        .get('/fake-output-url').reply(200, output)
+
+      const privateCircle = new Circle(context, 123)
+      await privateCircle.serialize()
+      expect(scoped.isDone()).toBeTruthy()
     })
   })
 })
