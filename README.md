@@ -37,11 +37,19 @@ after: "I'm sure you can fix it! If you need help, don't hesitate to ask a maint
 If you need more configuration, please [let me know in a new issue](https://github.com/JasonEtco/ci-reporter/issues/new?title=[Config]&body=Can%20you%20please%20add%20the%20___%20config%20option).
 
 
+## Private repositories
+
+For CI providers whose builds are kept private, you'll need to provide an API key for **ci-reporter** to get error logs. You can do that by getting an API key from your CI provider, then [encode your key using this tool](https://ci-reporter-c082c.firebaseapp.com). It will encrypt your key using a certificate only found in **ci-reporter**, so you can store the encrypted key in your repo's `.github/ci-reporter.yml` file:
+
+```yml
+tokens:
+  circle: 'my-encrypted-token'
+  travis: 'my-encrypted-token'
+```
 
 ## Does it work with _____?
 
 **ci-reporter** currently supports TravisCI and CircleCI. If you're interested in seeing support for another CI tool, please [open an issue](https://github.com/JasonEtco/ci-reporter/issues/new)!
-
 
 
 ## Contributing
