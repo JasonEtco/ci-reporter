@@ -11,8 +11,8 @@ class Travis {
     return 'continuous-integration/travis-ci/pr'
   }
 
-  buildUri (build) { return `https://api.travis-ci.org/build/${build}${this.param}` }
-  logUri (job) { return `https://api.travis-ci.org/job/${job}/log${this.param}` }
+  buildUri (build) { return `https://api.travis-ci.org/build/${build}` }
+  logUri (job) { return `https://api.travis-ci.org/job/${job}/log` }
 
   parseLog (log) {
     // sp00ky RegExp to start the extraction
