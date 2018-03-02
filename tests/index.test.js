@@ -190,4 +190,23 @@ describe('ci-reporter', () => {
     await robot.receive(event)
     expect(github.issues.createComment).not.toHaveBeenCalled()
   })
+
+  it('exists if the repo is private and does not have the right API key', async () => {
+    const event = {
+      event: 'status',
+      payload: {
+        state: 'failure',
+        context: 'ci/circleci',
+        installation: { id: 123 },
+        repository: {
+          name: 'public-test',
+          owner: { login: 'JasonEtco' },
+          private: true
+        }
+      }
+    }
+
+    await robot.receive(event)
+    expect(github.issues.createComment).not.toHaveBeenCalled()
+  })
 })
