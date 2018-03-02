@@ -88,13 +88,13 @@ describe('ci-reporter', () => {
       build = readFile(path.join('circle', 'build.json'))
       output = readFile(path.join('circle', 'output.json'))
       commit = readFile(path.join('circle', 'commit.json'))
-    })
 
-    it('creates the correct comment', async () => {
       nock('https://circleci.com')
         .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
         .get('/fake-output-url').reply(200, output)
+    })
 
+    it('creates the correct comment', async () => {
       await robot.receive(event)
       expect(github.issues.createComment).toHaveBeenCalledTimes(1)
 
@@ -107,26 +107,19 @@ describe('ci-reporter', () => {
     })
 
     it('creates the correct comment with before/after disabled', async () => {
-      nock('https://circleci.com')
-        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
-        .get('/fake-output-url').reply(200, output)
-
       github.repos.getContent.mockReturnValueOnce(Promise.resolve({ data: {content: Buffer.from('after: false\nbefore: false')} }))
       await robot.receive(event)
       expect(github.issues.createComment.mock.calls[0][0].body).toMatchSnapshot()
     })
 
     it('creates the correct comment with custom before/after', async () => {
-      nock('https://circleci.com')
-        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
-        .get('/fake-output-url').reply(200, output)
-
       github.repos.getContent.mockReturnValueOnce(Promise.resolve({ data: {content: Buffer.from('before: I come before!\nafter: And I come after!')} }))
       await robot.receive(event)
       expect(github.issues.createComment.mock.calls[0][0].body).toMatchSnapshot()
     })
 
     it('does not create a comment if the status is not in a PR', async () => {
+      nock.cleanAll()
       nock('https://circleci.com')
         .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, commit)
         .get('/fake-output-url').reply(200, output)
@@ -136,16 +129,13 @@ describe('ci-reporter', () => {
     })
 
     it('updates an existing comment', async () => {
-      nock('https://circleci.com')
-        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
-        .get('/fake-output-url').reply(200, output)
-
       github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGet))
       await robot.receive(event)
       expect(github.issues.editComment.mock.calls[0][0]).toMatchSnapshot()
     })
 
     it('updates an existing comment twice', async () => {
+      nock.cleanAll()
       nock('https://circleci.com')
         .get('/api/v1.1/project/github/JasonEtco/todo/5').times(2).reply(200, build)
         .get('/fake-output-url').times(2).reply(200, output)
@@ -158,10 +148,6 @@ describe('ci-reporter', () => {
     })
 
     it('respect the updateComment config', async () => {
-      nock('https://circleci.com')
-        .get('/api/v1.1/project/github/JasonEtco/todo/5').reply(200, build)
-        .get('/fake-output-url').reply(200, output)
-
       github.repos.getContent.mockReturnValueOnce(Promise.resolve({data: {content: Buffer.from('updateComment: false')}}))
       github.issues.getComments.mockReturnValueOnce(Promise.resolve(commentsGet))
       await robot.receive(event)
