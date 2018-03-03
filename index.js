@@ -1,4 +1,4 @@
-const createProbot = require('probot-ts')
+const { createProbot } = require('probot-ts')
 const { bot } = require('./dist')
 
 const settings = require('./env.json')
