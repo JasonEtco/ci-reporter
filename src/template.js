@@ -18,7 +18,9 @@ module.exports = `### The build is failing
 {{/if}}
 {{#if lastLog}}
 ---
+{{/if}}
 <!--START_OLD_LOGS-->
+{{#if lastLog}}
 <details>
   <summary>Failed build for <code>{{ lastCommit }}</code></summary>
 
