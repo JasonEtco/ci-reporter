@@ -18,16 +18,16 @@ class Travis {
 
   parseLog (log) {
     // sp00ky RegExp to start the extraction
-    const reg = /(\[0K\$\s)(?![\s\S]+\1)(.+)(?:\r\n|\n)*([\s\S]+)[\r\n]+.*Test failed\./g
+    const reg = /\[0K\$\snpm\stest(?:\r\n|\n)*([\s\S]+)[\r\n]+.*Test failed\./g
+
     const result = reg.exec(log)
 
     if (!result) {
       return false
     }
 
-    const command = result[2]
-    let content = result[3].trim()
-    return { command, content }
+    let content = result[1].trim()
+    return { content, command: 'npm test' }
   }
 
   async getLog (job) {
