@@ -1,9 +1,12 @@
 const request = require('request-promise-native')
 const stripAnsi = require('strip-ansi')
+const wait = ms => new Promise((resolve, reject) => setTimeout(resolve, ms))
 
 class Travis {
   constructor (context) {
     this.context = context
+    this.retries = 0
+    this.headers = { 'Travis-API-Version': 3 }
   }
 
   static get ctx () {
@@ -11,7 +14,7 @@ class Travis {
   }
 
   buildUri (build) { return `https://api.travis-ci.org/build/${build}` }
-  logUri (job) { return `https://api.travis-ci.org/job/${job}/log` }
+  logUri (job) { return `https://api.travis-ci.org/job/${job}/log.txt` }
 
   parseLog (log) {
     // sp00ky RegExp to start the extraction
@@ -27,26 +30,36 @@ class Travis {
     return { command, content }
   }
 
-  async serialize () {
-    const headers = { 'Travis-API-Version': 3 }
+  async getLog (job) {
+    const res = await request({
+      uri: this.logUri(job.id),
+      headers: this.headers
+    })
 
+    const result = this.parseLog(res)
+
+    if (!result && this.retries <= 3) {
+      this.context.log('Log incomplete; Retrying...')
+      this.retries = this.retries + 1
+
+      await wait(500)
+      return this.getLog(job)
+    }
+
+    return result
+  }
+
+  async serialize () {
     const { target_url: targetUrl } = this.context.payload
     const build = /\/builds\/(\d+)/g.exec(targetUrl)[1]
     const buildJson = await request({
       json: true,
       uri: this.buildUri(build),
-      headers
+      headers: this.headers
     })
 
     // TODO: Account for multiple jobs
-    const job = buildJson.jobs[0]
-    const res = await request({
-      json: true,
-      uri: this.logUri(job.id),
-      headers
-    })
-
-    const result = this.parseLog(res.content)
+    const result = await this.getLog(buildJson.jobs[0])
 
     if (result) {
       const { content, command } = result
