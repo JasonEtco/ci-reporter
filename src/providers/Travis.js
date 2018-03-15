@@ -1,6 +1,6 @@
 const request = require('request-promise-native')
 const stripAnsi = require('strip-ansi')
-const wait = ms => new Promise((resolve, reject) => setTimeout(resolve, ms))
+const delay = require('delay')
 
 class Travis {
   constructor (context) {
@@ -38,11 +38,13 @@ class Travis {
 
     const result = this.parseLog(res)
 
+    // Travis sometimes sends back incomplete logs
+    // if the request is made too quickly.
     if (!result && this.retries <= 3) {
       this.context.log('Log incomplete; Retrying...')
       this.retries = this.retries + 1
 
-      await wait(500)
+      await delay(500)
       return this.getLog(job)
     }
 
