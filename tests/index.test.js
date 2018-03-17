@@ -37,7 +37,7 @@ describe('ci-reporter', () => {
           pull_request_number: 1,
           jobs: [{ id: 1234, number: 1, state: 'failed' }]
         })
-        .get('/job/1234/log').reply(200, { content: log })
+        .get('/job/1234/log.txt').reply(200, log)
 
       const event = {
         event: 'status',

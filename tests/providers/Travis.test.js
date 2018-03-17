@@ -22,7 +22,7 @@ describe('Travis', () => {
   describe('logUri', () => {
     it('creates the correct URI', () => {
       const travis = new Travis()
-      expect(travis.logUri(123)).toBe('https://api.travis-ci.org/job/123/log')
+      expect(travis.logUri(123)).toBe('https://api.travis-ci.org/job/123/log.txt')
     })
   })
 
@@ -49,7 +49,8 @@ describe('Travis', () => {
       travis = new Travis({
         payload: {
           target_url: 'https://travis-ci.org/JasonEtco/public-test/builds/123?utm_source=github_status&utm_medium=notification'
-        }
+        },
+        log: jest.fn()
       })
     })
 
@@ -59,7 +60,7 @@ describe('Travis', () => {
           pull_request_number: 1,
           jobs: [{ id: 1234, number: 1, state: 'failed' }]
         })
-        .get('/job/1234/log').reply(200, { content: log })
+        .get('/job/1234/log.txt').reply(200, log)
 
       const res = await travis.serialize()
       expect(res.number).toBe(1)
@@ -67,12 +68,12 @@ describe('Travis', () => {
     })
 
     it('returns false if there is no match in the log', async () => {
-      nock('https://api.travis-ci.org')
+      nock('https://api.travis-ci.org').persist()
         .get('/build/123').reply(200, {
           pull_request_number: 1,
           jobs: [{ id: 1234, number: 1, state: 'failed' }]
         })
-        .get('/job/1234/log').reply(200, { content: 'Hello!' })
+        .get('/job/1234/log.txt').reply(200, 'Hello!')
       const res = await travis.serialize()
       expect(res).toBeFalsy()
     })
