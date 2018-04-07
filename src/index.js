@@ -62,6 +62,10 @@ module.exports = robot => {
         return newComment(opts)
       }
     } else if (context.payload.state === 'success') {
+      // Only allow known CI contexts to update failed state
+      const allowedContexts = [Travis.ctx, Circle.ctx]
+      if (allowedContexts.indexOf(context.payload.context) === -1) return
+
       const { sha } = context.payload
 
       // Search for all PRs that have a commit by this sha
