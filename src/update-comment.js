@@ -1,3 +1,4 @@
+// TODO: Remove the passing <details> if it exists
 async function updateComment ({context, template, data, sha, number, comment, after, before}) {
   const lastCommit = /<!--LAST_COMMIT=(.+)-->/g.exec(comment.body)[1]
   const lastLog = /<!--START_LOG-->([\s\S]+)<!--END_LOG-->/g.exec(comment.body)[1]
