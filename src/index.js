@@ -77,7 +77,7 @@ module.exports = robot => {
 
       // Determine if there is already a comment on this PR from ci-reporter
       const comment = await getExistingComment(context, number)
-      if (comment) {
+      if (comment && !comment.body.startsWith('<details>')) {
         // Update comment with <details> ${contents} </details>
         const summary = '✅ Your tests are passing again!'
         const body = `<details>\n<summary>${summary}</summary>\n\n${comment.body}\n</details>`
