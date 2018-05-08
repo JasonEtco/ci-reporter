@@ -14,7 +14,7 @@
     "deploy": "npm run build && gcloud beta functions deploy ci-reporter --trigger-http --entry-point bot"
   },
   "dependencies": {
-    "@google-cloud/logging-bunyan": "^0.7.0",
+    "@google-cloud/logging-bunyan": "^0.8.1",
     "delay": "^2.0.0",
     "probot": "^6.1.0",
     "probot-ts": "^4.0.1-typescript",
