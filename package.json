@@ -21,7 +21,7 @@
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
     "strip-ansi": "^4.0.0",
-    "webpack-cli": "^2.0.12"
+    "webpack-cli": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
