@@ -16,7 +16,7 @@
   "dependencies": {
     "@google-cloud/logging-bunyan": "^0.7.0",
     "delay": "^3.0.0",
-    "probot": "^6.1.0",
+    "probot": "^6.2.1",
     "probot-ts": "^4.0.1-typescript",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
