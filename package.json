@@ -36,7 +36,7 @@
     "nodemon": "^1.14.12",
     "smee-client": "^1.0.1",
     "standard": "^11.0.0",
-    "webpack": "^4.0.0"
+    "webpack": "^4.15.1"
   },
   "engines": {
     "node": ">= 7.7.0",
