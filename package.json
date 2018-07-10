@@ -33,7 +33,7 @@
     "jest": "^22.2.2",
     "localtunnel": "^1.8.2",
     "nock": "^9.1.4",
-    "nodemon": "^1.14.12",
+    "nodemon": "^1.18.0",
     "smee-client": "^1.0.1",
     "standard": "^11.0.0",
     "webpack": "^4.0.0"
