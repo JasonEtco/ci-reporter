@@ -3,6 +3,7 @@ const Circle = require('./providers/Circle')
 const defaultConfig = require('./default-config.json')
 const newComment = require('./new-comment')
 const updateComment = require('./update-comment')
+const getExistingComment = require('./get-existing-comment')
 
 // We already have an instance of handlebars from Probot's hbs dependency
 const { handlebars } = require('hbs')
@@ -47,8 +48,7 @@ module.exports = robot => {
 
         if (config.updateComment) {
           // Determine if there is already a comment on this PR from ci-reporter
-          const comments = await context.github.issues.getComments(context.issue({ number }))
-          const comment = comments.data.find(comment => comment.user.login === process.env.APP_NAME + '[bot]')
+          const comment = await getExistingComment(context, number)
 
           // If there is, edit that one
           if (comment) {
@@ -60,6 +60,33 @@ module.exports = robot => {
 
         context.log(`Creating comment ${owner}/${repo} #${number}`)
         return newComment(opts)
+      }
+    } else if (context.payload.state === 'success') {
+      // Only allow known CI contexts to update failed state
+      const allowedContexts = [Travis.ctx, Circle.ctx]
+      if (allowedContexts.indexOf(context.payload.context) === -1) return
+
+      const { sha } = context.payload
+
+      // Search for all PRs that have a commit by this sha
+      const prSearch = await context.github.search.issues({
+        q: sha + `is:pr repo:${owner}/${repo}`
+      })
+
+      // If there aren't any, exit
+      if (prSearch.data.total_count === 0) return
+
+      // Get the PR number
+      const { number } = prSearch.data.items.find(p => p.state === 'open')
+
+      // Determine if there is already a comment on this PR from ci-reporter
+      const comment = await getExistingComment(context, number)
+      if (comment && !comment.body.startsWith('<details>')) {
+        // Update comment with <details> ${contents} </details>
+        const summary = '✅ Your tests are passing again!'
+        const body = `<details>\n<summary>${summary}</summary>\n\n${comment.body}\n</details>`
+
+        return context.github.issues.editComment(context.repo({ number, body, id: comment.id }))
       }
     }
   })
